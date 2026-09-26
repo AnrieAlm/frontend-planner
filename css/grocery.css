@@ -1,0 +1,11 @@
+.grocery-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-md); }
+.grocery-header h2 { font-family: var(--font-display); }
+.grocery-header .subtitle { font-size: var(--fs-sm); color: var(--text-muted); }
+.grocery-nudge { background: var(--petal-lavender); border-radius: var(--radius-md); padding: var(--sp-md); margin-bottom: var(--sp-md); font-size: var(--fs-sm); display: flex; gap: var(--sp-sm); align-items: center; }
+.grocery-list { background: var(--bg-card); border-radius: var(--radius-md); box-shadow: var(--shadow-soft); padding: var(--sp-md); }
+.grocery-list h3 { font-size: var(--fs-sm); color: var(--text-muted); margin-bottom: var(--sp-sm); }
+.grocery-item { display: flex; align-items: center; gap: var(--sp-sm); padding: var(--sp-xs) 0; font-size: var(--fs-sm); }
+.grocery-item input[type="checkbox"] { accent-color: var(--petal-pink); }
+.grocery-item.checked { text-decoration: line-through; color: var(--text-muted); }
+.grocery-actions { display: flex; gap: var(--sp-md); margin-top: var(--sp-md); }
+.grocery-actions button { font-size: var(--fs-xs); padding: var(--sp-xs) var(--sp-sm); border-radius: var(--radius-full); background: var(--petal-cream); }

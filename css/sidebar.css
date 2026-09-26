@@ -1,0 +1,66 @@
+#sidebar { background: var(--bg-sidebar); border-right: 1px solid var(--border-light); padding: var(--sp-lg) var(--sp-md); display: flex; flex-direction: column; gap: var(--sp-xs); }
+.sidebar-logo { display: flex; align-items: center; gap: var(--sp-sm); margin-bottom: var(--sp-lg); }
+.sidebar-logo img { width: 32px; height: 32px; }
+.sidebar-logo h1 { font-family: var(--font-display); font-size: var(--fs-lg); color: var(--text-primary); }
+.sidebar-tagline { font-size: var(--fs-xs); color: var(--text-muted); margin-bottom: var(--sp-xl); }
+.sidebar-nav a { display: flex; align-items: center; gap: var(--sp-sm); padding: var(--sp-sm) var(--sp-md); border-radius: var(--radius-sm); font-size: var(--fs-sm); color: var(--text-secondary); transition: background 0.2s; }
+.sidebar-nav a:hover, .sidebar-nav a.active { background: var(--petal-blush); color: var(--text-primary); }
+.sidebar-user { margin-top: auto; display: flex; align-items: center; gap: var(--sp-sm); padding: var(--sp-sm); border-radius: var(--radius-sm); }
+.sidebar-user img { width: 28px; height: 28px; border-radius: var(--radius-full); }
+
+/* =========================================
+   SIDEBAR THEME SWITCHER STYLES
+   ========================================= */
+.sidebar-theme-block {
+  margin-top: var(--sp-lg);
+  padding: var(--sp-md);
+  background: var(--bg-main);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.sidebar-theme-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  margin-bottom: 2px;
+  color: var(--text-primary);
+}
+
+.sidebar-theme-sub {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  margin-bottom: var(--sp-sm);
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  padding: var(--sp-xs) var(--sp-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 2px;
+}
+
+.theme-option:hover {
+  background: var(--petal-blush);
+  color: var(--text-primary);
+}
+
+.theme-option.active {
+  background: var(--petal-blush);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--petal-pink);
+}
+
+.theme-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}

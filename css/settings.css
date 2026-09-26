@@ -1,0 +1,17 @@
+.settings-header h2 { font-family: var(--font-display); margin-bottom: var(--sp-xs); }
+.settings-header .subtitle { font-size: var(--fs-sm); color: var(--text-muted); margin-bottom: var(--sp-lg); }
+.settings-section { background: var(--bg-card); border-radius: var(--radius-md); box-shadow: var(--shadow-soft); padding: var(--sp-md); margin-bottom: var(--sp-md); }
+.settings-section h3 { font-size: var(--fs-base); margin-bottom: var(--sp-sm); padding-bottom: var(--sp-xs); border-bottom: 1px solid var(--border-light); }
+.settings-row { display: flex; justify-content: space-between; align-items: center; padding: var(--sp-sm) 0; font-size: var(--fs-sm); }
+.settings-row label { color: var(--text-secondary); }
+.settings-row input, .settings-row select { padding: var(--sp-xs) var(--sp-sm); border: 1px solid var(--border-light); border-radius: var(--radius-sm); background: var(--bg-main); }
+.toggle { position: relative; width: 44px; height: 24px; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle .slider { position: absolute; inset: 0; background: var(--border-light); border-radius: var(--radius-full); transition: 0.2s; cursor: pointer; }
+.toggle .slider::before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; bottom: 3px; background: white; border-radius: var(--radius-full); transition: 0.2s; }
+.toggle input:checked + .slider { background: var(--petal-pink); }
+.toggle input:checked + .slider::before { transform: translateX(20px); }
+.settings-note { font-size: var(--fs-xs); color: var(--text-muted); background: var(--petal-cream); padding: var(--sp-sm) var(--sp-md); border-radius: var(--radius-sm); margin-top: var(--sp-sm); }
+.settings-danger { display: flex; gap: var(--sp-md); margin-top: var(--sp-lg); }
+.btn-signout { padding: var(--sp-sm) var(--sp-md); border: 1px solid var(--border-light); border-radius: var(--radius-full); font-size: var(--fs-sm); }
+.btn-delete { padding: var(--sp-sm) var(--sp-md); color: #d32f2f; border: 1px solid #d32f2f; border-radius: var(--radius-full); font-size: var(--fs-sm); }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Petal Planner — Cottage Core</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/landing.css" />
+</head>
+<body class="landing-body">
+
+  <nav class="landing-nav">
+    <div class="landing-nav-brand">Petal Planner</div>
+    <div class="landing-nav-links">
+      <a href="#">Today</a>
+      <a href="#">Notes</a>
+      <a href="#">Calendar</a>
+      <a href="#">Habits</a>
+      <a href="#" class="landing-nav-cta" onclick="openAuthModal()">Sign in</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="landing-hero">
+      <h1>Your little cosy corner for everything</h1>
+      <p>A planner that feels like a warm afternoon with tea and a notebook. Post-its, habits, calendar — all in one calm place.</p>
+      <a href="index.html" class="landing-hero-btn">Open my planner</a>
+    </section>
+
+    <section class="landing-features">
+      <div class="feature-card">
+        <h3>Notes & bucket list</h3>
+        <p>Post-its for everything — movies, places, plans. Organised in a warm grid.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Calendar</h3>
+        <p>A month at a glance. Dots for notes, rings for habits.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Habits</h3>
+        <p>Three gentle habits. Soft streak messages, no guilt.</p>
+      </div>
+    </section>
+
+    <section class="landing-preview">
+      <h2>A peek inside</h2>
+      <div class="preview-mockup">
+        <strong>Wednesday, 24 Sept · a quiet morning</strong><br><br>
+        ✓ Pick up herbs from market · 9:00 am<br>
+        ! MSc thesis draft · Due Friday<br>
+        🎬 Movie night with Boris · 7:00 pm<br><br>
+        <em>Morning yoga · 7 days &nbsp;&nbsp; Read · 3 days &nbsp;&nbsp; Journal ✓</em>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-container"></div>
+  <div id="auth-container"></div>
+
+  <script src="js/landing-loader.js"></script>
+  <script>
+    document.getElementById('footer-text').innerText = 'Made with care & chamomile tea · Petal Planner · Your notes are yours alone';
+    document.getElementById('modal-subtitle').innerText = 'step into your corner';
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+.theme-grimoire {
+  --bg-main: #0B0F12; --bg-card: #161D21; --bg-sidebar: #11171A;
+  --text-primary: #E2E8E4; --text-secondary: #B0BDB5; --text-muted: #7A8B80;
+  --border-light: #2E5A36; /* Emerald accent for borders */
+  --petal-pink: #2E5A36; --petal-blush: #3A7345; --petal-cream: #1A2429;
+  --petal-lavender: #1E2E23; --petal-mint: #2E5A36; --petal-tea: #4A3F25; /* Gold-ish */
+  --petal-periwinkle: #2A3B4A; --petal-butter: #D4AF37; /* Actual Gold */
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.8);
+  
+  /* Typography Stack */
+  --font-display: 'Passions Conflict', cursive;
+  --font-chrome: 'Cormorant SC', serif;
+  --font-body: 'EB Garamond', serif;
+  --bg-texture: url('images/texture-velvet.svg');
+  
+  /* UI Shapes */
+  --card-radius: 2px;
+  --btn-radius: 2px;
+  --border-style: 1px solid #D4AF37;
+}
+body.theme-grimoire { background-image: var(--bg-texture); background-attachment: fixed; }
+.theme-grimoire h1, .theme-grimoire h2, .theme-grimoire h3 { font-family: var(--font-display); font-weight: 400; }
+.theme-grimoire button, .theme-grimoire .sidebar-nav a, .theme-grimoire .note-meta { font-family: var(--font-chrome); letter-spacing: 0.05em; text-transform: uppercase; }
+.theme-grimoire .note-card, .theme-grimoire .routine-card, .theme-grimoire .modal-content { border: var(--border-style); border-radius: var(--card-radius); }
+.theme-grimoire .btn-primary, .theme-grimoire .btn-modal-primary { border-radius: var(--btn-radius); font-family: var(--font-chrome); letter-spacing: 0.1em; }

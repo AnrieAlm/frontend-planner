@@ -1,0 +1,21 @@
+.modal-overlay { position: fixed; inset: 0; background: rgba(62, 39, 35, 0.3); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: var(--sp-md); }
+.modal-content { background: var(--bg-card); border-radius: var(--radius-lg); box-shadow: var(--shadow-modal); padding: var(--sp-lg); width: 100%; max-width: 420px; max-height: 90dvh; overflow-y: auto; position: relative; }
+.modal-close { position: absolute; top: var(--sp-md); right: var(--sp-md); font-size: var(--fs-lg); color: var(--text-muted); }
+.modal-content h3 { font-family: var(--font-display); font-size: var(--fs-lg); margin-bottom: var(--sp-md); }
+.modal-content label { display: block; font-size: var(--fs-sm); color: var(--text-secondary); margin-bottom: var(--sp-xs); }
+.modal-content input, .modal-content select, .modal-content textarea { width: 100%; padding: var(--sp-sm) var(--sp-md); border: 1px solid var(--border-light); border-radius: var(--radius-sm); margin-bottom: var(--sp-md); background: var(--bg-main); }
+.modal-content textarea { resize: vertical; min-height: 80px; }
+.colour-options { display: flex; gap: var(--sp-sm); margin-bottom: var(--sp-md); }
+.colour-dot { width: 28px; height: 28px; border-radius: var(--radius-full); border: 2px solid transparent; cursor: pointer; }
+.colour-dot.selected { border-color: var(--text-primary); }
+.colour-dot.butter { background: var(--petal-butter); }
+.colour-dot.tea { background: var(--petal-tea); }
+.colour-dot.periwinkle { background: var(--petal-periwinkle); }
+.colour-dot.mint { background: var(--petal-mint); }
+.day-picker { display: flex; gap: var(--sp-xs); margin-bottom: var(--sp-md); }
+.day-picker button { width: 36px; height: 36px; border-radius: var(--radius-full); font-size: var(--fs-xs); background: var(--border-light); }
+.day-picker button.active { background: var(--petal-pink); }
+.modal-actions { display: flex; gap: var(--sp-sm); justify-content: flex-end; margin-top: var(--sp-md); }
+.btn-modal-primary { padding: var(--sp-sm) var(--sp-lg); background: var(--petal-pink); border-radius: var(--radius-full); font-weight: 600; font-size: var(--fs-sm); }
+.btn-modal-danger { padding: var(--sp-sm) var(--sp-lg); background: #ffcdd2; color: #c62828; border-radius: var(--radius-full); font-size: var(--fs-sm); }
+.btn-modal-secondary { padding: var(--sp-sm) var(--sp-lg); border: 1px solid var(--border-light); border-radius: var(--radius-full); font-size: var(--fs-sm); }

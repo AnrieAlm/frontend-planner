@@ -1,0 +1,18 @@
+:root {
+  /* Layout & Spacing */
+  --fs-xs: 0.75rem; --fs-sm: 0.85rem; --fs-base: 1rem; --fs-lg: 1.25rem; --fs-xl: 1.5rem; --fs-2xl: 2rem;
+  --sp-xs: 4px; --sp-sm: 8px; --sp-md: 16px; --sp-lg: 24px; --sp-xl: 32px; --sp-2xl: 48px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 20px; --radius-full: 9999px;
+  --sidebar-width: 240px; --bottom-nav-height: 64px;
+}
+
+/* Theme Switcher Dots */
+.theme-switcher { display: flex; gap: var(--sp-sm); padding: var(--sp-sm) 0; }
+.theme-dot { width: 24px; height: 24px; border-radius: var(--radius-full); border: 2px solid transparent; cursor: pointer; transition: 0.2s; }
+.theme-dot.active { border-color: var(--text-primary); transform: scale(1.1); }
+
+/* The 4 Theme Gradients */
+.theme-dot.original-pink { background: linear-gradient(135deg, #f2c4ce, #fdf2f4); }
+.theme-dot.petal { background: linear-gradient(135deg, #F2C4CE, #C5CAE9); }
+.theme-dot.grimoire { background: linear-gradient(135deg, #2E5A36, #D4AF37); }
+.theme-dot.scarlet { background: linear-gradient(135deg, #C83226, #180E0E); }

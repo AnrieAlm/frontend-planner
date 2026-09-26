@@ -1,0 +1,26 @@
+.theme-petal {
+  --bg-main: #FDF8F1; --bg-card: #FFFFFF; --bg-sidebar: #F4F1EA;
+  --text-primary: #4A3B32; --text-secondary: #6D5C50; --text-muted: #8D7B6E;
+  --border-light: #A8B5A0; /* Sage green */
+  --petal-pink: #D4A5A5; --petal-blush: #E8C4C4; --petal-cream: #FDF6F0;
+  --petal-lavender: #C8B8DB; --petal-mint: #A8B5A0; --petal-tea: #E6D5B8;
+  --petal-periwinkle: #B8C4DB; --petal-butter: #F2E6B8;
+  --shadow-soft: 0 4px 16px rgba(74, 59, 50, 0.08);
+  --shadow-modal: 0 8px 32px rgba(74, 59, 50, 0.12);
+  
+  /* Typography Stack */
+  --font-display: 'Lora', serif;
+  --font-chrome: 'Quicksand', sans-serif;
+  --font-body: 'Quicksand', sans-serif;
+  --font-accent: 'Caveat', cursive;
+  --bg-texture: url('images/texture-linen.svg');
+  
+  /* UI Shapes */
+  --card-radius: 12px 20px 12px 20px; /* Organic, hand-crafted feel */
+  --btn-radius: 999px;
+  --border-style: 1px dashed #A8B5A0;
+}
+body.theme-petal { background-image: var(--bg-texture); background-attachment: fixed; }
+.theme-petal h1, .theme-petal h2, .theme-petal h3 { font-family: var(--font-display); }
+.theme-petal .habit-chip, .theme-petal .bucket-cat { font-family: var(--font-accent); font-size: 1.1rem; }
+.theme-petal .note-card, .theme-petal .routine-card { border-radius: var(--card-radius); border: var(--border-style); }

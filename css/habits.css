@@ -1,0 +1,12 @@
+.habits-header { margin-bottom: var(--sp-lg); }
+.habits-header h2 { font-family: var(--font-display); }
+.habits-header .subtitle { font-size: var(--fs-sm); color: var(--text-muted); }
+.habit-card { background: var(--bg-card); border-radius: var(--radius-md); box-shadow: var(--shadow-soft); padding: var(--sp-md); margin-bottom: var(--sp-md); }
+.habit-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-xs); }
+.habit-card-header h3 { font-size: var(--fs-base); }
+.habit-streak { font-size: var(--fs-xs); color: var(--text-muted); }
+.habit-week { display: flex; gap: var(--sp-sm); margin: var(--sp-sm) 0; }
+.habit-day { width: 32px; height: 32px; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; font-size: var(--fs-xs); background: var(--border-light); }
+.habit-day.done { background: var(--petal-mint); }
+.habit-reminder { font-size: var(--fs-xs); color: var(--text-muted); }
+.habits-footer { font-size: var(--fs-xs); color: var(--text-muted); text-align: center; margin-top: var(--sp-md); }

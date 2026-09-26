@@ -1,0 +1,9 @@
+.screen { min-height: 100dvh; }
+#app-shell { display: grid; grid-template-columns: var(--sidebar-width) 1fr; grid-template-rows: 1fr; min-height: 100dvh; }
+#main-content { padding: var(--sp-lg); overflow-y: auto; max-height: 100dvh; }
+.page { max-width: 720px; margin: 0 auto; }
+@media (max-width: 768px) {
+  #app-shell { grid-template-columns: 1fr; }
+  #sidebar { display: none; }
+  #main-content { padding-bottom: calc(var(--bottom-nav-height) + var(--sp-lg)); }
+}
