@@ -1,30 +1,58 @@
 <div class="bucketlist-header">
-  <div><h2>Bucket List</h2><span class="subtitle">everything you want to do, watch, and see</span></div>
-  <button class="btn-new-routine" data-modal="bucket-item">+ Add item</button>
+  <div>
+    <h2>Bucket List</h2>
+    <span class="subtitle">everything you want to do, watch, and see</span>
+  </div>
+  <button class="btn-add-bucket" data-modal="bucket-item">+ Add item</button>
 </div>
-<div class="bucket-categories">
-  <span class="bucket-cat">🎬 Movies <strong>3</strong></span><span class="bucket-cat">📍 Places <strong>4</strong></span>
-  <span class="bucket-cat">📦 Things <strong>2</strong></span><span class="bucket-cat">✨ Experiences <strong>5</strong></span>
+
+<div class="bucket-categories" role="tablist" aria-label="Bucket list categories">
+  <span class="bucket-cat cat-movies active">🎬 Movies <strong>3</strong></span>
+  <span class="bucket-cat cat-places">📍 Places <strong>4</strong></span>
+  <span class="bucket-cat cat-things">📦 Things <strong>2</strong></span>
+  <span class="bucket-cat cat-experiences">✨ Experiences <strong>5</strong></span>
 </div>
-<div class="bucket-section"><h3>🎬 Movies</h3>
-  <div class="bucket-item"><div><strong>Dune: Part Three</strong><br/><span class="bucket-detail">When it comes out</span></div></div>
-  <div class="bucket-item"><div><strong>Past Lives</strong><br/><span class="bucket-detail">Celine Song, 2023</span></div></div>
-  <div class="bucket-item done"><div><strong>Poor Things</strong><br/><span class="bucket-detail">Watched — loved it ✓ Done</span></div></div>
+
+<!-- Movies -->
+<div class="bucket-section" id="section-movies">
+  <h3>🎬 Movies</h3>
+  <div class="bucket-item"><div><strong>Dune: Part Three</strong><span class="bucket-detail">When it comes out</span></div></div>
+  <div class="bucket-item"><div><strong>Past Lives</strong><span class="bucket-detail">Celine Song, 2023</span></div></div>
 </div>
-<div class="bucket-section"><h3>📍 Places</h3>
-  <div class="bucket-item"><div><strong>Azores, Portugal</strong><br/><span class="bucket-detail">Spring — hot springs and green hills</span></div></div>
-  <div class="bucket-item"><div><strong>Lisbon</strong><br/><span class="bucket-detail">Finally, properly</span></div></div>
-  <div class="bucket-item"><div><strong>Goa family trip</strong><br/><span class="bucket-detail">With Boris, December</span></div></div>
-  <div class="bucket-item"><div><strong>Scottish Highlands</strong><br/><span class="bucket-detail">Cottage for a weekend</span></div></div>
+
+<!-- Places -->
+<div class="bucket-section" id="section-places">
+  <h3>📍 Places</h3>
+  <div class="bucket-item"><div><strong>Azores, Portugal</strong><span class="bucket-detail">Spring — hot springs and green hills</span></div></div>
+  <div class="bucket-item"><div><strong>Lisbon</strong><span class="bucket-detail">Finally, properly</span></div></div>
+  <div class="bucket-item"><div><strong>Goa family trip</strong><span class="bucket-detail">With Boris, December</span></div></div>
+  <div class="bucket-item"><div><strong>Scottish Highlands</strong><span class="bucket-detail">Cottage for a weekend</span></div></div>
 </div>
-<div class="bucket-section"><h3>📦 Things</h3>
-  <div class="bucket-item"><div><strong>Grow herbs on windowsill</strong><br/><span class="bucket-detail">Lavender, mint, thyme</span></div></div>
-  <div class="bucket-item"><div><strong>Learn sourdough</strong><br/><span class="bucket-detail">Proper starter from scratch</span></div></div>
+
+<!-- Things -->
+<div class="bucket-section" id="section-things">
+  <h3>📦 Things</h3>
+  <div class="bucket-item"><div><strong>Grow herbs on windowsill</strong><span class="bucket-detail">Lavender, mint, thyme</span></div></div>
+  <div class="bucket-item"><div><strong>Learn sourdough</strong><span class="bucket-detail">Proper starter from scratch</span></div></div>
 </div>
-<div class="bucket-section"><h3>✨ Experiences</h3>
-  <div class="bucket-item"><div><strong>See Northern Lights</strong><br/><span class="bucket-detail">Iceland or Norway</span></div></div>
-  <div class="bucket-item"><div><strong>Pottery class</strong><br/><span class="bucket-detail">With Esgi or Grace</span></div></div>
-  <div class="bucket-item"><div><strong>Cook a Sunday roast</strong><br/><span class="bucket-detail">For everyone</span></div></div>
-  <div class="bucket-item"><div><strong>Watch a sunrise</strong><br/><span class="bucket-detail">Somewhere beautiful</span></div></div>
-  <div class="bucket-item"><div><strong>Write a short story</strong><br/><span class="bucket-detail">A proper one</span></div></div>
+
+<!-- Experiences -->
+<div class="bucket-section" id="section-experiences">
+  <h3>✨ Experiences</h3>
+  <div class="bucket-item"><div><strong>See Northern Lights</strong><span class="bucket-detail">Iceland or Norway</span></div></div>
+  <div class="bucket-item"><div><strong>Pottery class</strong><span class="bucket-detail">With Esgi or Grace</span></div></div>
+  <div class="bucket-item"><div><strong>Cook a Sunday roast</strong><span class="bucket-detail">For everyone</span></div></div>
+  <div class="bucket-item"><div><strong>Watch a sunrise</strong><span class="bucket-detail">Somewhere beautiful</span></div></div>
+  <div class="bucket-item"><div><strong>Write a short story</strong><span class="bucket-detail">A proper one</span></div></div>
+</div>
+
+<!-- Done shelf — collapsed by default, js/bucketlist.js's initDoneToggle() handles this -->
+<button class="bucket-done-toggle">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="16" height="16" aria-hidden="true">
+    <path d="M9 6l6 6-6 6" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
+  </svg>
+  Done <span aria-hidden="true">·</span> 1
+</button>
+<div class="bucket-section">
+  <div class="bucket-item done"><div><strong>Poor Things</strong><span class="bucket-detail">Watched — loved it</span></div></div>
 </div>

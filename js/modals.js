@@ -15,11 +15,6 @@ const Modals = {
       if (e.target === this.overlay) this.close();
     });
 
-    // Close on the ✕ button, wherever it appears in the loaded modal HTML
-    document.addEventListener('click', (e) => {
-      if (e.target.closest('[data-close-modal]')) this.close();
-    });
-
     // Escape closes the modal — required by the original design system
     // spec ("Keyboard: Escape closes modal") but never implemented
     document.addEventListener('keydown', (e) => {
@@ -28,13 +23,42 @@ const Modals = {
       }
     });
 
-    // Delegated open triggers — anything with data-modal="name" opens
-    // that modal. This is what makes .habit-card, .bucket-item, etc.
-    // work without each page's JS needing its own listener.
+    // One delegated click listener handles everything that can happen
+    // inside a modal or trigger it to open — colour-dot selection,
+    // the close (✕) button, and any [data-modal] open trigger anywhere
+    // in the app. Checked in this order because a click can only ever
+    // match one of these at a time; each returns early once handled.
     document.addEventListener('click', (e) => {
-      const trigger = e.target.closest('[data-modal]');
-      if (trigger) this.open(trigger.dataset.modal);
+      const dot = e.target.closest('.colour-dot');
+      if (dot) {
+        this.selectColourDot(dot);
+        return;
+      }
+
+      const closeBtn = e.target.closest('[data-close-modal]');
+      if (closeBtn) {
+        this.close();
+        return;
+      }
+
+      const openTrigger = e.target.closest('[data-modal]');
+      if (openTrigger) {
+        this.open(openTrigger.dataset.modal);
+        return;
+      }
     });
+  },
+
+  // Colour-dot selection — works inside whichever modal is currently
+  // open, since .colour-options only exists once a modal has loaded
+  selectColourDot(dot) {
+    const group = dot.closest('.colour-options');
+    group?.querySelectorAll('.colour-dot').forEach(d => {
+      d.classList.remove('selected');
+      d.setAttribute('aria-pressed', 'false');
+    });
+    dot.classList.add('selected');
+    dot.setAttribute('aria-pressed', 'true');
   },
 
   // data is optional — e.g. Modals.open('edit-routine', { name: 'Morning weekday' })
@@ -60,8 +84,8 @@ const Modals = {
     } catch (err) {
       console.error(`Couldn't open modal "${modalName}":`, err);
       console.warn(
-        `If this is edit-routine or bucket-item-edit, that component file ` +
-        `doesn't exist yet — it was flagged as missing in js/routine.js / js/bucketlist.js.`
+        `If this is edit-routine, bucket-item-edit, or more, that component ` +
+        `file doesn't exist yet — flagged as missing in earlier files.`
       );
     }
   },
