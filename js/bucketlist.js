@@ -16,41 +16,32 @@ const Bucketlist = {
   // default (matches the current mock HTML, which lists all four in a
   // row) — clicking a tab scrolls to and highlights that section, since
   // this is a single scrollable page rather than separate tab panels.
+  // .bucket-cat is a real <button role="tab"> now, so it's already
+  // keyboard-focusable and Enter/Space-activatable with zero JS.
   initCategoryTabs() {
     document.querySelectorAll('.bucket-cat').forEach(tab => {
-      tab.setAttribute('tabindex', '0');
-      tab.setAttribute('role', 'button');
-
-      const activate = () => {
-        document.querySelectorAll('.bucket-cat').forEach(t => t.classList.remove('active'));
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.bucket-cat').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
         tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
 
-        const targetId = 'section-' + tab.classList[1]?.replace('cat-', '');
+        // data-category instead of classList[1] — no longer breaks if
+        // the category class ever moves position in the class list
+        const targetId = 'section-' + tab.dataset.category;
         document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      };
-
-      tab.addEventListener('click', activate);
-      tab.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          activate();
-        }
       });
     });
   },
 
+  // .bucket-item is a real <button> now too — same reasoning, no more
+  // tabindex/role/keydown needed
   initItems() {
     document.querySelectorAll('.bucket-item').forEach(item => {
-      item.setAttribute('tabindex', '0');
-      item.setAttribute('role', 'button');
-
-      const open = () => Modals.open('bucket-item-edit', { title: item.querySelector('strong')?.textContent });
-      item.addEventListener('click', open);
-      item.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          open();
-        }
+      item.addEventListener('click', () => {
+        Modals.open('bucket-item-edit', { title: item.querySelector('strong')?.textContent });
       });
     });
   },

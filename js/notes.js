@@ -26,20 +26,15 @@ const Notes = {
     });
   },
 
+
+    // .note-card is a real <button> now (pages/notes.html), so it's
+  // keyboard-focusable and Enter/Space-activatable with zero JS —
+  // no more tabindex/role gymnastics, just wire the click
   initNoteCards() {
     document.querySelectorAll('.note-card[data-modal="edit-note"]').forEach(card => {
-      // Make the card keyboard-operable — it's a clickable <div>, not a
-      // <button>, so without this a keyboard user can't reach it at all
-      card.setAttribute('tabindex', '0');
-      card.setAttribute('role', 'button');
-
       card.addEventListener('click', () => Modals.open('edit-note'));
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          Modals.open('edit-note');
-        }
-      });
     });
+
+   
   }
 };

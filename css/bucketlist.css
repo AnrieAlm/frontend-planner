@@ -59,10 +59,15 @@
   border-radius: var(--radius-full);
   font-size: var(--fs-sm);
   font-weight: 700;
+  font-family: inherit;
   display: inline-flex;
   align-items: center;
   gap: var(--sp-xs);
   border: 1.5px solid transparent;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
   transition: transform 0.15s var(--ease-soft), box-shadow 0.15s var(--ease-soft);
 }
 
