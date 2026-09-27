@@ -1,13 +1,182 @@
-.calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-md); }
-.calendar-header h2 { font-family: var(--font-display); }
-.calendar-nav { display: flex; gap: var(--sp-sm); }
-.calendar-nav button { font-size: var(--fs-lg); padding: var(--sp-xs) var(--sp-sm); }
-.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: var(--sp-lg); }
-.calendar-day-label { text-align: center; font-size: var(--fs-xs); color: var(--text-muted); padding: var(--sp-xs); }
-.calendar-day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: var(--fs-sm); border-radius: var(--radius-sm); cursor: pointer; }
-.calendar-day:hover { background: var(--petal-blush); }
-.calendar-day.today { background: var(--petal-pink); font-weight: 700; }
-.calendar-day.has-event::after { content: ''; width: 4px; height: 4px; border-radius: var(--radius-full); background: var(--text-primary); margin-top: 2px; }
-.calendar-day-detail { background: var(--bg-card); border-radius: var(--radius-md); box-shadow: var(--shadow-soft); padding: var(--sp-md); }
-.calendar-day-detail h3 { font-size: var(--fs-base); margin-bottom: var(--sp-sm); }
-.calendar-event { display: flex; gap: var(--sp-sm); padding: var(--sp-xs) 0; font-size: var(--fs-sm); }
+/*
+  Petal Planner — Calendar page
+  Primary accent = main calendar colour (today, active states).
+  Quaternary accent = secondary marks (habit ring, deadline marker) —
+  this is the "Calendar secondary" role from the design system.
+*/
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-md);
+  flex-wrap: wrap;
+}
+
+.calendar-header h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-lg);
+  color: var(--text-primary);
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.calendar-nav button {
+  font-size: var(--fs-md);
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.calendar-nav button:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.btn-add-event {
+  min-height: 44px;
+  padding: 0 var(--sp-md);
+  background: var(--accent-primary);
+  color: var(--accent-on);
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.15s var(--ease-soft), box-shadow 0.15s var(--ease-soft), filter 0.15s ease;
+}
+
+.btn-add-event:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lift);
+  filter: brightness(0.96);
+}
+
+/* ===== Month grid ===== */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  margin-bottom: var(--sp-lg);
+}
+
+.calendar-day-label {
+  text-align: center;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--text-secondary);
+  padding: var(--sp-xs);
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.calendar-day:empty {
+  cursor: default;
+}
+
+.calendar-day:not(:empty):hover {
+  background: var(--bg-card);
+}
+
+.calendar-day:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.calendar-day.today {
+  background: var(--accent-primary);
+  color: var(--accent-on);
+  font-weight: 700;
+}
+
+/* dot = has notes */
+.calendar-day.has-event::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  margin-top: 2px;
+}
+
+/* ring = has an active habit that day */
+.calendar-day.has-habit {
+  box-shadow: inset 0 0 0 2px var(--accent-quaternary);
+}
+
+/* deadline marker = small flag in the corner */
+.calendar-day.has-deadline::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--accent-quaternary);
+}
+
+/* ===== Day detail panel ===== */
+.calendar-day-detail {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: var(--sp-md);
+}
+
+.calendar-day-detail h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-base);
+  color: var(--text-primary);
+  margin-bottom: var(--sp-sm);
+}
+
+.calendar-day-detail .btn-add-inline {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--accent-primary);
+  min-height: 32px;
+  margin-bottom: var(--sp-sm);
+}
+
+.calendar-day-detail .btn-add-inline:hover {
+  text-decoration: underline;
+}
+
+.calendar-event {
+  display: flex;
+  gap: var(--sp-sm);
+  padding: var(--sp-xs) 0;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+}
+
+/* Desktop: day detail sits beside the grid, not below it */
+@media (min-width: 701px) {
+  .calendar-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: var(--sp-lg);
+    align-items: start;
+  }
+}

@@ -1,10 +1,185 @@
-.bucketlist-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-md); }
-.bucketlist-header h2 { font-family: var(--font-display); }
-.bucketlist-header .subtitle { font-size: var(--fs-sm); color: var(--text-muted); }
-.bucket-categories { display: flex; gap: var(--sp-sm); margin-bottom: var(--sp-lg); flex-wrap: wrap; }
-.bucket-cat { padding: var(--sp-xs) var(--sp-md); border-radius: var(--radius-full); font-size: var(--fs-sm); background: var(--bg-card); box-shadow: var(--shadow-soft); }
-.bucket-section { margin-bottom: var(--sp-lg); }
-.bucket-section h3 { font-size: var(--fs-base); margin-bottom: var(--sp-sm); }
-.bucket-item { background: var(--bg-card); border-radius: var(--radius-sm); padding: var(--sp-sm) var(--sp-md); margin-bottom: var(--sp-xs); font-size: var(--fs-sm); display: flex; justify-content: space-between; align-items: center; }
-.bucket-item.done { opacity: 0.5; text-decoration: line-through; }
-.bucket-item .bucket-detail { font-size: var(--fs-xs); color: var(--text-muted); }
+/*
+  Petal Planner — Bucket List page
+  The one page where all four accent roles appear together:
+  Movies = secondary, Places = primary, Things = tertiary,
+  Experiences = quaternary (Dusty Plum / Dusty Berry).
+*/
+
+.bucketlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-md);
+}
+
+.bucketlist-header h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-xl);
+  color: var(--text-primary);
+}
+
+.bucketlist-header .subtitle {
+  font-family: var(--font-hand);
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+}
+
+.btn-add-bucket {
+  min-height: 44px;
+  padding: 0 var(--sp-md);
+  background: var(--accent-quaternary);
+  color: var(--accent-on);
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.15s var(--ease-soft), box-shadow 0.15s var(--ease-soft), filter 0.15s ease;
+  flex-shrink: 0;
+}
+
+.btn-add-bucket:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lift);
+  filter: brightness(0.96);
+}
+
+/* ===== Category tabs — each one carries its own accent ===== */
+.bucket-categories {
+  display: flex;
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-lg);
+  flex-wrap: wrap;
+}
+
+.bucket-cat {
+  min-height: 44px;
+  padding: 0 var(--sp-md);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  border: 1.5px solid transparent;
+  transition: transform 0.15s var(--ease-soft), box-shadow 0.15s var(--ease-soft);
+}
+
+.bucket-cat:hover {
+  transform: translateY(-1px);
+}
+
+.bucket-cat strong {
+  font-weight: 700;
+}
+
+.bucket-cat.cat-movies {
+  background: color-mix(in srgb, var(--accent-secondary) 18%, var(--bg-base));
+  color: var(--accent-secondary);
+}
+.bucket-cat.cat-movies.active {
+  background: var(--accent-secondary);
+  color: var(--accent-on);
+}
+
+.bucket-cat.cat-places {
+  background: color-mix(in srgb, var(--accent-primary) 18%, var(--bg-base));
+  color: var(--accent-primary);
+}
+.bucket-cat.cat-places.active {
+  background: var(--accent-primary);
+  color: var(--accent-on);
+}
+
+.bucket-cat.cat-things {
+  background: color-mix(in srgb, var(--accent-tertiary) 18%, var(--bg-base));
+  color: var(--accent-tertiary);
+}
+.bucket-cat.cat-things.active {
+  background: var(--accent-tertiary);
+  color: var(--accent-on);
+}
+
+.bucket-cat.cat-experiences {
+  background: color-mix(in srgb, var(--accent-quaternary) 18%, var(--bg-base));
+  color: var(--accent-quaternary);
+}
+.bucket-cat.cat-experiences.active {
+  background: var(--accent-quaternary);
+  color: var(--accent-on);
+}
+
+/* ===== Section (Movies / Places / Things / Experiences list) ===== */
+.bucket-section {
+  margin-bottom: var(--sp-lg);
+}
+
+.bucket-section h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-base);
+  color: var(--text-primary);
+  margin-bottom: var(--sp-sm);
+}
+
+.bucket-item {
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-sm) var(--sp-md);
+  margin-bottom: var(--sp-xs);
+  min-height: 44px;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.15s var(--ease-soft), box-shadow 0.15s var(--ease-soft);
+}
+
+.bucket-item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
+
+.bucket-item.done {
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+
+.bucket-item .bucket-detail {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-top: 2px;
+}
+
+/* Collapsible "Done" shelf */
+.bucket-done-toggle {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--text-secondary);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  margin-top: var(--sp-sm);
+}
+
+.bucket-done-toggle:hover {
+  color: var(--text-primary);
+}
+
+.bucket-done-toggle svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.5;
+  transition: transform 0.2s ease;
+}
+
+.bucket-done-toggle.expanded svg {
+  transform: rotate(90deg);
+}
