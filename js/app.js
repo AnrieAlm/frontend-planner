@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 const App = {
   init() {
+    EmojiIcons.apply();
     Navigation.init();
     Auth.init();
     Today.init();
