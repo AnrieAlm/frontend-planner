@@ -17,7 +17,7 @@
   --shadow-soft:    0px 2px 8px rgba(58, 49, 40, 0.08);
   --shadow-lift:    0px 4px 14px rgba(58, 49, 40, 0.16);
   --focus-ring:     #5D7654;
-
+--day-circle-bg: rgba(58, 49, 40, 0.08);   /* was reusing --border-soft (0.12) — too dark once composited under --text-secondary, failed 4.5:1 at 4.34:1. 0.08 gives 4.67:1. */
   /* accent roles — same four roles in both themes */
   --accent-primary:      #5D7654; /* Sage */
   --accent-secondary:    #B5716F; /* Rose */
@@ -84,7 +84,7 @@
   --shadow-soft:    0px 2px 8px rgba(0, 0, 0, 0.35);
   --shadow-lift:    0px 4px 16px rgba(0, 0, 0, 0.5);
   --focus-ring:     #E0C387;
-
+--day-circle-bg: rgba(240, 237, 231, 0.12);   /* same value as --border-soft — already passes at 4.93:1, just given its own token so it's not accidentally coupled to border-soft's future changes */
   --accent-primary:      #E0C387; /* Gold */
   --accent-secondary:    #83A788; /* Moss */
   --accent-tertiary:     #C9AD7C; /* Tan */

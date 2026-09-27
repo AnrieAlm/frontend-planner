@@ -79,7 +79,7 @@
   justify-content: center;
   font-size: var(--fs-xs);
   font-weight: 700;
-  background: var(--border-soft);
+  background: var(--day-circle-bg);   /* was var(--border-soft) */
   color: var(--text-secondary);
   transition: background 0.2s ease, color 0.2s ease;
 }
