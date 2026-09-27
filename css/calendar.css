@@ -111,11 +111,11 @@
 /* dot = has notes */
 .calendar-day.has-event::after {
   content: '';
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
   border-radius: var(--radius-full);
-  background: currentColor;
-  margin-top: 2px;
+  background: var(--accent-primary); /* was currentColor — too low-contrast on dark cells */
+  margin-top: 3px;
 }
 
 /* ring = has an active habit that day */
@@ -123,16 +123,18 @@
   box-shadow: inset 0 0 0 2px var(--accent-quaternary);
 }
 
-/* deadline marker = small flag in the corner */
-.calendar-day.has-deadline::before {
+/* was: full-cell inset ring — replaced with a small corner tick,
+   so it can't be misread as a multi-day range selection */
+.calendar-day.has-habit::before {
   content: '';
   position: absolute;
-  top: 3px;
-  right: 3px;
+  bottom: 4px;
+  left: 4px;
   width: 6px;
   height: 6px;
   border-radius: var(--radius-full);
-  background: var(--accent-quaternary);
+  border: 1.5px solid var(--accent-quaternary);
+  background: transparent;
 }
 
 /* ===== Day detail panel ===== */
@@ -171,12 +173,29 @@
   color: var(--text-primary);
 }
 
-/* Desktop: day detail sits beside the grid, not below it */
-@media (min-width: 701px) {
-  .calendar-layout {
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: var(--sp-lg);
-    align-items: start;
-  }
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-md);
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
 }
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+}
+
+.legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.legend-today { background: var(--accent-primary); }
+.legend-dot { background: var(--accent-primary); width: 6px; height: 6px; border-radius: var(--radius-full); }
+.legend-habit { border: 1.5px solid var(--accent-quaternary); background: transparent; }
+.legend-deadline { background: var(--accent-quaternary); border-radius: var(--radius-full); width: 6px; height: 6px; }
