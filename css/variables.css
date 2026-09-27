@@ -32,6 +32,11 @@
   --postit-text: #3A3128;
   --tape-color: rgba(181, 113, 111, 0.55);
 
+  --calendar-bg:            #FDF8F1;
+--calendar-text:          #4A3B32;
+--calendar-text-secondary: #8D7B6E;
+--calendar-mark:      #D4A5A5;
+--calendar-mark-tint: #E8C4C4;
   /* type */
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body:    'Nunito', 'Segoe UI', system-ui, sans-serif;
@@ -91,4 +96,10 @@
   --postit-3: #D9CFDD;
   --postit-text: #2A2520; /* stays dark ink even on the dark theme — legible on light post-it paper */
   --tape-color: rgba(224, 195, 135, 0.55);
+
+  --calendar-mark:            #9C6367;
+--calendar-mark-tint:       #C98287;
+--calendar-bg:               #242B27; /* reusing --bg-card's value; adjust if you want it distinct */
+--calendar-text:             #F0EDE7; /* reusing --text-primary's value */
+--calendar-text-secondary:   #B8B3AA; /* reusing --text-secondary's value */
 }

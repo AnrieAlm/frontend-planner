@@ -1,0 +1,372 @@
+]633;E;echo "=== variables.css: Cottagecore calendar tokens ===";c11471db-bfc3-4e93-8d1d-1ddc8a58ef3d]633;C=== variables.css: Cottagecore calendar tokens ===
+35:  --calendar-bg:            #FDF8F1;
+36:--calendar-text:          #4A3B32;
+37:--calendar-text-secondary: #8D7B6E;
+
+=== variables.css: full :root block (Cottagecore) ===
+:root {
+  /* ===== COTTAGECORE (default / light) ===== */
+  --bg-base:        #FDFBF7;
+  --bg-card:        #F4EFE6;
+  --bg-raised:      #FFFFFF;
+  --text-primary:   #3A3128;
+  --text-secondary: #6E6152;
+  --border-soft:    rgba(58, 49, 40, 0.12);
+  --border-strong:  rgba(58, 49, 40, 0.28);
+  --shadow-soft:    0px 2px 8px rgba(58, 49, 40, 0.08);
+  --shadow-lift:    0px 4px 14px rgba(58, 49, 40, 0.16);
+  --focus-ring:     #5D7654;
+
+  /* accent roles — same four roles in both themes */
+  --accent-primary:      #5D7654; /* Sage */
+  --accent-secondary:    #B5716F; /* Rose */
+  --accent-tertiary:     #A17F1F; /* Gold */
+  --accent-quaternary:   #8A6B8C; /* Dusty Plum */
+  --accent-on:           #FDFBF7; /* text/icon colour sitting ON any accent */
+
+  /* post-it note colours */
+  --postit-1: #F2E3C6;
+  --postit-2: #F0D6D6;
+  --postit-3: #DCE5D8;
+  --postit-text: #3A3128;
+  --tape-color: rgba(181, 113, 111, 0.55);
+
+  --calendar-bg:            #FDF8F1;
+--calendar-text:          #4A3B32;
+--calendar-text-secondary: #8D7B6E;
+
+  /* type */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --font-hand:    'Caveat', cursive;
+
+  --fs-xs:  0.75rem;   /* 12px */
+  --fs-sm:  0.8125rem; /* 13px */
+  --fs-base: 0.9375rem;/* 15px */
+  --fs-md:  1.0625rem; /* 17px */
+  --fs-lg:  1.25rem;   /* 20px */
+  --fs-xl:  1.75rem;   /* 28px */
+  --fs-2xl: 2.25rem;   /* 36px */
+
+  /* spacing — 8pt grid */
+  --sp-xs:  4px;
+  --sp-sm:  8px;
+  --sp-md:  16px;
+  --sp-lg:  24px;
+  --sp-xl:  32px;
+  --sp-2xl: 48px;
+
+  /* radii */
+  --radius-sm:   10px;
+  --radius-md:   14px;
+  --radius-lg:   20px;
+  --radius-full: 9999px;
+
+  /* layout */
+  --sidebar-width: 240px;
+  --bottom-nav-height: 64px;
+
+  /* motion */
+  --ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+=== variables.css: full midnight block ===
+[data-theme="midnight"] {
+  --bg-base:        #1A1F1C;
+  --bg-card:        #242B27;
+  --bg-raised:      #2C332E;
+  --text-primary:   #F0EDE7;
+  --text-secondary: #B8B3AA;
+  --border-soft:    rgba(240, 237, 231, 0.12);
+  --border-strong:  rgba(240, 237, 231, 0.28);
+  --shadow-soft:    0px 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-lift:    0px 4px 16px rgba(0, 0, 0, 0.5);
+  --focus-ring:     #E0C387;
+
+  --accent-primary:      #E0C387; /* Gold */
+  --accent-secondary:    #83A788; /* Moss */
+  --accent-tertiary:     #C9AD7C; /* Tan */
+  --accent-quaternary:   #D98FA3; /* Dusty Berry */
+  --accent-on:           #1A1F1C; /* text/icon colour sitting ON any accent */
+
+  --postit-1: #EDE3D0;
+  --postit-2: #CFDACF;
+  --postit-3: #D9CFDD;
+  --postit-text: #2A2520; /* stays dark ink even on the dark theme — legible on light post-it paper */
+  --tape-color: rgba(224, 195, 135, 0.55);
+}
+
+=== calendar.css: full file ===
+/*
+  Petal Planner — Calendar page
+  Primary accent = header/button/Coming-up family (Today, Habits).
+  Calendar's own date-marking system (today / hover / selected) uses
+  --calendar-mark and --calendar-mark-tint instead of the accent roles —
+  a dedicated dusty-rose pairing tuned specifically for this page.
+  Quaternary accent = habit ring / deadline marker (Calendar secondary role).
+*/
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-md);
+  flex-wrap: wrap;
+}
+
+.calendar-header h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-lg);
+  color: var(--text-primary);
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.calendar-nav button {
+  font-size: var(--fs-md);
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.calendar-nav button:hover {
+  background: var(--calendar-mark-tint);
+  color: var(--text-primary);
+}
+
+.btn-add-event {
+  min-height: 44px;
+  padding: 0 var(--sp-md);
+  background: var(--accent-primary);
+  color: var(--accent-on);
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.15s var(--ease-soft), box-shadow 0.15s var(--ease-soft), filter 0.15s ease;
+}
+
+.btn-add-event:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lift);
+  filter: brightness(0.96);
+}
+
+/* ===== Legend ===== */
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-md);
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+}
+
+.legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.legend-today { background: var(--calendar-mark); }
+.legend-dot { background: var(--accent-primary); width: 6px; height: 6px; border-radius: var(--radius-full); }
+.legend-habit { border: 1.5px solid var(--accent-quaternary); background: transparent; }
+.legend-deadline { background: var(--accent-quaternary); border-radius: var(--radius-full); width: 6px; height: 6px; }
+
+/* ===== Month grid ===== */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  margin-bottom: var(--sp-lg);
+  background: var(--calendar-bg);
+  padding: var(--sp-sm);
+  border-radius: var(--radius-md);
+}
+
+.calendar-day-label {
+  text-align: center;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--calendar-text-secondary);
+  padding: var(--sp-xs);
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-sm);
+  color: var(--calendar-text);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.calendar-day:empty {
+  cursor: default;
+}
+
+.calendar-day:not(:empty):hover {
+  background: color-mix(in srgb, var(--calendar-mark-tint) 55%, var(--bg-base));
+  color: var(--text-primary);
+}
+
+.calendar-day:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.calendar-day.today {
+  background: var(--calendar-mark);
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* Clicked/viewing date — outline only, so .today stays the visually
+   stronger mark and a selected-but-not-today date doesn't get confused
+   for the actual current date */
+.calendar-day.selected {
+  outline: 2px solid var(--calendar-mark);
+  outline-offset: -2px;
+}
+
+/* dot = has notes */
+.calendar-day.has-event::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary);
+  margin-top: 3px;
+}
+
+/* ring = has an active habit that day — small corner mark, not a
+   full-cell border, so it can't be misread as a multi-day range */
+.calendar-day.has-habit::before {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--accent-quaternary);
+  background: transparent;
+}
+
+/* deadline marker = corner dot */
+.calendar-day.has-deadline::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--accent-quaternary);
+}
+
+/* ===== Day detail panel — stacked below the grid on every screen size ===== */
+.calendar-day-detail {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: var(--sp-md);
+}
+
+.calendar-day-detail h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-base);
+  color: var(--text-primary);
+  margin-bottom: var(--sp-sm);
+}
+
+.calendar-day-detail .btn-add-inline {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--accent-primary);
+  min-height: 32px;
+  margin-bottom: var(--sp-sm);
+}
+
+.calendar-day-detail .btn-add-inline:hover {
+  text-decoration: underline;
+}
+
+.calendar-event {
+  display: flex;
+  gap: var(--sp-sm);
+  padding: var(--sp-xs) 0;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+}
+=== calendar.html: legend + grid markup ===
+2:  <div class="calendar-legend">
+24:<div class="calendar-layout">
+26:    <div class="calendar-grid">
+27:      <span class="calendar-day-label">Mon</span>
+28:      <span class="calendar-day-label">Tue</span>
+29:      <span class="calendar-day-label">Wed</span>
+30:      <span class="calendar-day-label">Thu</span>
+31:      <span class="calendar-day-label">Fri</span>
+32:      <span class="calendar-day-label">Sat</span>
+33:      <span class="calendar-day-label">Sun</span>
+36:      <span class="calendar-day"></span>
+37:      <span class="calendar-day" data-date="2026-09-01">1</span>
+38:      <span class="calendar-day" data-date="2026-09-02">2</span>
+39:      <span class="calendar-day" data-date="2026-09-03">3</span>
+40:      <span class="calendar-day" data-date="2026-09-04">4</span>
+41:      <span class="calendar-day" data-date="2026-09-05">5</span>
+42:      <span class="calendar-day" data-date="2026-09-06">6</span>
+45:      <span class="calendar-day" data-date="2026-09-07">7</span>
+46:      <span class="calendar-day" data-date="2026-09-08">8</span>
+47:      <span class="calendar-day" data-date="2026-09-09">9</span>
+48:      <span class="calendar-day" data-date="2026-09-10">10</span>
+49:      <span class="calendar-day" data-date="2026-09-11">11</span>
+50:      <span class="calendar-day" data-date="2026-09-12">12</span>
+51:      <span class="calendar-day" data-date="2026-09-13">13</span>
+54:      <span class="calendar-day has-habit" data-date="2026-09-14">14</span>
+55:      <span class="calendar-day has-habit" data-date="2026-09-15">15</span>
+56:      <span class="calendar-day has-habit" data-date="2026-09-16">16</span>
+57:      <span class="calendar-day has-habit" data-date="2026-09-17">17</span>
+58:      <span class="calendar-day has-habit" data-date="2026-09-18">18</span>
+59:      <span class="calendar-day" data-date="2026-09-19">19</span>
+60:      <span class="calendar-day" data-date="2026-09-20">20</span>
+63:      <span class="calendar-day" data-date="2026-09-21">21</span>
+64:      <span class="calendar-day" data-date="2026-09-22">22</span>
+65:      <span class="calendar-day" data-date="2026-09-23">23</span>
+66:      <span class="calendar-day today" data-date="2026-09-24">24</span>
+67:      <span class="calendar-day has-event" data-date="2026-09-25">25</span>
+68:      <span class="calendar-day" data-date="2026-09-26">26</span>
+69:      <span class="calendar-day has-event" data-date="2026-09-27">27</span>
+72:      <span class="calendar-day has-event has-deadline" data-date="2026-09-28">28</span>
+73:      <span class="calendar-day has-event has-deadline" data-date="2026-09-29">29</span>
+74:      <span class="calendar-day" data-date="2026-09-30">30</span>
+75:      <span class="calendar-day"></span>
+76:      <span class="calendar-day"></span>
+77:      <span class="calendar-day"></span>
+78:      <span class="calendar-day"></span>
+83:  <div class="calendar-day-detail">
+
+=== sanity check: any leftover .calendar-layout media query? (should be empty) ===
+pages/calendar.html:24:<div class="calendar-layout">
