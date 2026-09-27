@@ -1,0 +1,65 @@
+./js/sinead-ai.js:2:  init() { console.log('Sinéad AI initialised 🧠'); },
+./js/modals.js:28:    // the close (✕) button, and any [data-modal] open trigger anywhere
+./landing-slytherin.html:52:        ✓ Acquire potion ingredients · 9:00 am<br>
+./landing-slytherin.html:54:        🎬 Evening with Boris · 7:00 pm<br><br>
+./landing-slytherin.html:55:        <em>Morning study · 7 days &nbsp;&nbsp; Read · 3 days &nbsp;&nbsp; Journal ✓</em>
+./pages/settings.html:134:    📱 iPhone users: Add to Home Screen for vibration and push to work. Safari → Share → Add to Home Screen.
+./pages/bucketlist.html:10:  <span class="bucket-cat cat-movies active">🎬 Movies <strong>3</strong></span>
+./pages/bucketlist.html:11:  <span class="bucket-cat cat-places">📍 Places <strong>4</strong></span>
+./pages/bucketlist.html:12:  <span class="bucket-cat cat-things">📦 Things <strong>2</strong></span>
+./pages/bucketlist.html:13:  <span class="bucket-cat cat-experiences">✨ Experiences <strong>5</strong></span>
+./pages/bucketlist.html:18:  <h3>🎬 Movies</h3>
+./pages/bucketlist.html:25:  <h3>📍 Places</h3>
+./pages/bucketlist.html:34:  <h3>📦 Things</h3>
+./pages/bucketlist.html:41:  <h3>✨ Experiences</h3>
+./pages/today.html:13:    <p>🧠 <strong>Sinéad noticed:</strong> You usually pick up chicken on Thursdays — it's Thursday today. Add it to your grocery list?</p>
+./pages/today.html:23:  <h3>☀️ Morning routine</h3>
+./pages/today.html:27:    <span>🚿 Shower · 8 min left</span>
+./pages/today.html:31:    <span>☕ Wake up &amp; coffee — 10 min</span>
+./pages/today.html:35:    <span>🧘 Morning yoga — 20 min · habit ✓</span>
+./pages/today.html:39:    <span>🚿 Shower — 15 min</span>
+./pages/today.html:43:    <span>🍳 Breakfast &amp; journal ⚡ — shortened, 9am lecture, 20 min</span>
+./pages/today.html:47:    <span>🚶 Leave for Griffith — depart</span>
+./pages/today.html:68:    ⚑ <strong>Due Fri</strong> — MSc thesis methodology chapter<br />
+./pages/today.html:78:    <span>Griffith lecture — RAG systems ✓</span>
+./pages/today.html:82:    <span>📅 Lunch with Esgi — Café on George's St</span>
+./pages/today.html:86:    <span>🎬 Movie night with Boris</span>
+./pages/today.html:92:  <span class="habit-chip">🧘 Morning yoga — 7 day streak ✓</span>
+./pages/today.html:93:  <span class="habit-chip">📖 Read — 3 days</span>
+./pages/today.html:94:  <span class="habit-chip">📓 Journal ✓ Done today</span>
+./pages/notes.html:24:  <h4>⚑ MSc thesis chapter</h4>
+./pages/notes.html:48:  <h4>✓ Book train to Cork</h4>
+./pages/notes.html:50:  <span class="note-meta">Done ✓</span>
+./pages/habits.html:9:    <h3>🧘 Morning yoga</h3>
+./pages/habits.html:29:    <h3>📖 Read</h3>
+./pages/habits.html:49:    <h3>📓 Journal</h3>
+./pages/habits.html:50:    <span class="habit-streak">Done today ✓</span>
+./pages/grocery.html:10:  <span aria-hidden="true">🧠</span>
+./pages/grocery.html:29:  <button>🔊 Read list aloud</button>
+./pages/routine.html:27:  <div class="routine-block"><span class="block-time">7:00</span> ☕ Wake up &amp; coffee <span class="block-duration">10 min</span> <span class="block-tag">Fixed 📳</span></div>
+./pages/routine.html:28:  <div class="routine-block"><span class="block-time">7:10</span> 🧘 Morning yoga 🔗 habit <span class="block-duration">20 min</span> <span class="block-tag flexible">Flexible 📳</span></div>
+./pages/routine.html:29:  <div class="routine-block"><span class="block-time">7:30</span> 🪥 Brush teeth <span class="block-duration">5 min</span> <span class="block-tag">Fixed</span></div>
+./pages/routine.html:30:  <div class="routine-block"><span class="block-time">7:35</span> 🚿 Shower <span class="block-duration">15 min</span> <span class="block-tag">Fixed 📳</span></div>
+./pages/routine.html:31:  <div class="routine-block"><span class="block-time">7:50</span> 👗 Get dressed <span class="block-duration">10 min</span> <span class="block-tag">Fixed</span></div>
+./pages/routine.html:32:  <div class="routine-block"><span class="block-time">8:00</span> 🍳 Breakfast &amp; journal 🔗 habit <span class="block-duration">25 min</span> <span class="block-tag flexible">Flexible 📳</span></div>
+./pages/routine.html:33:  <div class="routine-block"><span class="block-time">8:25</span> 🚶 Leave for Griffith — depart <span class="block-tag">Fixed 📳</span></div>
+./pages/routine.html:71:  <div class="routine-block"><span class="block-time">9:00</span> 📓 Journal 🔗 habit <span class="block-duration">15 min</span> <span class="block-tag flexible">Flexible 📳</span></div>
+./pages/routine.html:72:  <div class="routine-block"><span class="block-time">9:15</span> 🧴 Skin routine <span class="block-duration">10 min</span> <span class="block-tag">Fixed</span></div>
+./pages/routine.html:73:  <div class="routine-block"><span class="block-time">9:25</span> 📖 Read <span class="block-duration">20 min</span> <span class="block-tag flexible">Flexible</span></div>
+./pages/routine.html:74:  <div class="routine-block"><span class="block-time">9:45</span> 💤 Lights out <span class="block-tag">Fixed 📳</span></div>
+./landing-crimson.html:52:        ✓ Write to the publisher · 9:00 am<br>
+./landing-crimson.html:54:        🎬 Evening with Boris · 7:00 pm<br><br>
+./landing-crimson.html:55:        <em>Morning write · 7 days &nbsp;&nbsp; Read · 3 days &nbsp;&nbsp; Journal ✓</em>
+./landing-cottage.html:51:        ✓ Pick up herbs from market · 9:00 am<br>
+./landing-cottage.html:53:        🎬 Movie night with Boris · 7:00 pm<br><br>
+./landing-cottage.html:54:        <em>Morning yoga · 7 days &nbsp;&nbsp; Read · 3 days &nbsp;&nbsp; Journal ✓</em>
+./components/modal-bucket-item.html:9:  <option value="movies">🎬 Movies</option>
+./components/modal-bucket-item.html:10:  <option value="places">📍 Places</option>
+./components/modal-bucket-item.html:11:  <option value="things">📦 Things</option>
+./components/modal-bucket-item.html:12:  <option value="experiences">✨ Experiences</option>
+./components/modal-pick-date.html:1:<button class="modal-close" data-close-modal>✕</button>
+./components/modal-edit-note.html:28:  <button class="btn-modal-secondary">📅 Google Calendar</button>
+./components/modal-bucket-item-edit.html:9:  <option value="movies">🎬 Movies</option>
+./components/modal-bucket-item-edit.html:10:  <option value="places">📍 Places</option>
+./components/modal-bucket-item-edit.html:11:  <option value="things">📦 Things</option>
+./components/modal-bucket-item-edit.html:12:  <option value="experiences" selected>✨ Experiences</option>

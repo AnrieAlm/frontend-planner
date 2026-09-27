@@ -74,3 +74,12 @@ textarea:focus-visible,
     transition: none !important;
   }
 }
+
+.content-icon {
+  display: inline-flex;
+  vertical-align: -3px;
+  margin-right: 2px;
+}
+.content-icon svg {
+  display: block;
+}

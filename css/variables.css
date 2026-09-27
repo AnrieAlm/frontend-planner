@@ -25,12 +25,16 @@
   --accent-quaternary:   #8A6B8C; /* Dusty Plum */
   --accent-on:           #FDFBF7; /* text/icon colour sitting ON any accent */
 
-  /* post-it note colours */
-  --postit-1: #F2E3C6;
-  --postit-2: #F0D6D6;
-  --postit-3: #DCE5D8;
-  --postit-text: #3A3128;
-  --tape-color: rgba(181, 113, 111, 0.55);
+  /* Post-it Colors (Vintage) */
+    --postit-1: #F2E3C6; /* Aged Yellow */
+    --postit-2: #F0D6D6; /* Dried Rose */
+    --postit-3: #DCE5D8; /* Faded Sage */
+    /* :root (cottagecore) block */
+--postit-4: #E8DFF5;
+/* :root (cottagecore) block, next to --postit-4 */
+--postit-5: #D9E4F0; /* Powder Blue */
+    --postit-text: #4A5568;/* Soft Ink Blue/Grey */
+    --tape-color: rgba(212, 165, 165, 0.6); /* Dusty Rose Tape */
 
   --calendar-bg:            #FDF8F1;
 --calendar-text:          #4A3B32;
@@ -94,6 +98,11 @@
   --postit-1: #EDE3D0;
   --postit-2: #CFDACF;
   --postit-3: #D9CFDD;
+  /* [data-theme="midnight"] block */
+--postit-4: #D6CBE8; /* muted lavender, consistent with
+ the other dark-theme post-it tones */
+ /* [data-theme="midnight"] block, next to --postit-4 */
+--postit-5: #C7D3E3; /* Dusty Slate Blue */
   --postit-text: #2A2520; /* stays dark ink even on the dark theme — legible on light post-it paper */
   --tape-color: rgba(224, 195, 135, 0.55);
 

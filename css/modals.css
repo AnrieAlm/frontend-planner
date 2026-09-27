@@ -159,7 +159,8 @@
 .colour-dot.colour-1 { background: var(--postit-1); }
 .colour-dot.colour-2 { background: var(--postit-2); }
 .colour-dot.colour-3 { background: var(--postit-3); }
-
+.colour-dot.colour-4 { background: var(--postit-4); }
+.colour-dot.colour-5 { background: var(--postit-5); }
 /* ===== Day picker ===== */
 .day-picker {
   display: flex;
@@ -235,4 +236,36 @@
 
 .btn-modal-secondary:hover {
   background: var(--bg-card);
+}
+
+/* ===== More sheet (bottom-nav overflow: Routine, Habits, Grocery, Bucket List, Settings) ===== */
+.more-sheet-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+}
+
+.more-sheet-link {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  min-height: 48px;
+  padding: 0 var(--sp-sm);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.more-sheet-link:hover {
+  background: var(--bg-card);
+}
+
+.more-sheet-link:active {
+  transform: translateY(1px);
+}
+
+.more-sheet-link:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
 }
