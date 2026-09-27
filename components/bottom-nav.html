@@ -1,5 +1,42 @@
-<button class="bottom-nav-item active" data-page="today"><img src="images/placeholder-icon.svg" alt="" /><span>Today</span></button>
-<button class="bottom-nav-item" data-page="notes"><img src="images/placeholder-icon.svg" alt="" /><span>Notes</span></button>
-<button class="bottom-nav-item" data-page="habits"><img src="images/placeholder-icon.svg" alt="" /><span>+Habits</span></button>
-<button class="bottom-nav-item" data-page="calendar"><img src="images/placeholder-icon.svg" alt="" /><span>Calendar</span></button>
-<button class="bottom-nav-item" data-page="settings"><img src="images/placeholder-icon.svg" alt="" /><span>✕</span></button>
+<button class="bottom-nav-item active" data-page="today">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+    <rect x="3" y="5" width="18" height="16" rx="1" stroke-width="1.5" stroke-linecap="square"/>
+    <path d="M3 10h18M8 3v4M16 3v4" stroke-width="1.5" stroke-linecap="square"/>
+    <path d="M8 14l2 2 4-4" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/>
+  </svg>
+  <span>Today</span>
+</button>
+
+<button class="bottom-nav-item" data-page="notes">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+    <path d="M6 3h9l4 4v14H6z" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M15 3v4h4M9 11h7M9 15h7M9 19h4" stroke-width="1.5" stroke-linecap="square"/>
+  </svg>
+  <span>Notes</span>
+</button>
+
+<button class="bottom-nav-add" data-modal="new-note" aria-label="New note">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="22" height="22" aria-hidden="true">
+    <path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="square"/>
+  </svg>
+</button>
+
+<button class="bottom-nav-item" data-page="calendar">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+    <rect x="3" y="5" width="18" height="16" rx="1" stroke-width="1.5" stroke-linecap="square"/>
+    <path d="M3 10h18M8 3v4M16 3v4" stroke-width="1.5" stroke-linecap="square"/>
+    <circle cx="8" cy="14" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="14" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/>
+  </svg>
+  <span>Calendar</span>
+</button>
+
+<button class="bottom-nav-item" data-modal="more" aria-label="More">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+    <circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+    <circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+  </svg>
+  <span>More</span>
+</button>

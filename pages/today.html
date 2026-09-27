@@ -1,46 +1,100 @@
 <div class="today-header">
-  <div><h2>Today</h2><span class="today-date">Wednesday, 24 September</span></div>
+  <div>
+    <h2>Today</h2>
+    <span class="today-date">Wednesday, 24 September</span>
+  </div>
   <span class="today-subtitle">a quiet morning</span>
 </div>
+
+<!-- Sinéad AI nudge -->
 <div class="sinead-nudge">
-  <img class="sinead-avatar" src="images/placeholder-avatar.svg" alt="Sinéad" />
+  <img class="sinead-avatar" src="images/placeholder-avatar.svg" alt="" />
   <div>
     <p>🧠 <strong>Sinéad noticed:</strong> You usually pick up chicken on Thursdays — it's Thursday today. Add it to your grocery list?</p>
-    <div class="nudge-actions"><button>Add it</button><button>Not today</button></div>
+    <div class="nudge-actions">
+      <button data-action="accept">Add it</button>
+      <button data-action="dismiss">Not today</button>
+    </div>
   </div>
 </div>
+
+<!-- Morning routine -->
 <div class="morning-routine">
   <h3>☀️ Morning routine</h3>
-  <p style="font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:var(--sp-sm);">Your morning</p>
-  <div class="timeline-block active"><span class="timeline-time">Now</span><span>🚿 Shower · 8 min left</span></div>
-  <div class="timeline-block"><span class="timeline-time">7:00</span><span>☕ Wake up &amp; coffee <small>10 min</small></span></div>
-  <div class="timeline-block"><span class="timeline-time">7:10</span><span>🧘 Morning yoga <small>20 min · habit ✓</small></span></div>
-  <div class="timeline-block"><span class="timeline-time">7:35</span><span>🚿 Shower <small>15 min</small></span></div>
-  <div class="timeline-block"><span class="timeline-time">7:50</span><span>🍳 Breakfast &amp; journal ⚡ <small>Shortened — 9am lecture · 20 min</small></span></div>
-  <div class="timeline-block"><span class="timeline-time">8:10</span><span>🚶 Leave for Griffith <small>depart</small></span></div>
+
+  <div class="timeline-block active">
+    <span class="timeline-time">Now</span>
+    <span>🚿 Shower · 8 min left</span>
+  </div>
+  <div class="timeline-block">
+    <span class="timeline-time">7:00</span>
+    <span>☕ Wake up &amp; coffee — 10 min</span>
+  </div>
+  <div class="timeline-block">
+    <span class="timeline-time">7:10</span>
+    <span>🧘 Morning yoga — 20 min · habit ✓</span>
+  </div>
+  <div class="timeline-block">
+    <span class="timeline-time">7:35</span>
+    <span>🚿 Shower — 15 min</span>
+  </div>
+  <div class="timeline-block">
+    <span class="timeline-time">7:50</span>
+    <span>🍳 Breakfast &amp; journal ⚡ — shortened, 9am lecture, 20 min</span>
+  </div>
+  <div class="timeline-block">
+    <span class="timeline-time">8:10</span>
+    <span>🚶 Leave for Griffith — depart</span>
+  </div>
 </div>
+
+<!-- Carry-over from yesterday -->
 <div class="carry-over">
   <h3>From yesterday</h3>
   <div class="carry-over-item">
     <span>Book dentist appointment</span>
-    <div class="carry-over-actions"><button>Move to today</button><button>New date</button><button>Let it go</button></div>
+    <div class="carry-over-actions">
+      <button>Move to today</button>
+      <button>New date</button>
+      <button>Let it go</button>
+    </div>
   </div>
 </div>
+
+<!-- Urgent -->
 <div class="today-urgent">
   <h3>Urgent</h3>
-  <div class="urgent-card">⚑ <strong>Due Fri</strong> — MSc thesis methodology chapter<br /><small>Aim to finish today · 2 days to deadline</small></div>
+  <div class="urgent-card">
+    ⚑ <strong>Due Fri</strong> — MSc thesis methodology chapter<br />
+    Aim to finish today · 2 days to deadline
+  </div>
 </div>
+
+<!-- Schedule -->
 <div class="today-urgent">
   <h3>Today</h3>
-  <div class="schedule-item"><span class="schedule-time">9:00 am</span><span>Griffith lecture — RAG systems ✓</span></div>
-  <div class="schedule-item"><span class="schedule-time">12:00 pm</span><span>📅 Lunch with Esgi — Café on George's St</span></div>
-  <div class="schedule-item"><span class="schedule-time">7:00 pm</span><span>🎬 Movie night with Boris</span></div>
+  <div class="schedule-item">
+    <span class="schedule-time">9:00 am</span>
+    <span>Griffith lecture — RAG systems ✓</span>
+  </div>
+  <div class="schedule-item">
+    <span class="schedule-time">12:00 pm</span>
+    <span>📅 Lunch with Esgi — Café on George's St</span>
+  </div>
+  <div class="schedule-item">
+    <span class="schedule-time">7:00 pm</span>
+    <span>🎬 Movie night with Boris</span>
+  </div>
 </div>
+
+<!-- Habits mini -->
 <div class="today-habits">
   <span class="habit-chip">🧘 Morning yoga — 7 day streak ✓</span>
   <span class="habit-chip">📖 Read — 3 days</span>
   <span class="habit-chip">📓 Journal ✓ Done today</span>
 </div>
+
+<!-- Coming up -->
 <div class="coming-up">
   <h3>Coming up</h3>
   <ul>
@@ -50,4 +104,5 @@
     <li><strong>Oct 9</strong> — Darren's birthday — 15 days</li>
   </ul>
 </div>
+
 <button class="btn-briefing">▶️ Play morning briefing</button>

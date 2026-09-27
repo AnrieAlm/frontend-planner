@@ -1,13 +1,63 @@
+/**
+ * Petal Planner — Today Page
+ */
 const Today = {
   init() {
     const briefingBtn = document.querySelector('.btn-briefing');
-    briefingBtn?.addEventListener('click', () => { SineadAI.playBriefing(); });
+    briefingBtn?.addEventListener('click', () => {
+      SineadAI.playBriefing();
+    });
+
+    this.initNudgeActions();
+    this.initCarryOverActions();
+  },
+
+  // Sinéad's proactive nudge ("Add chicken to grocery list?")
+  initNudgeActions() {
     document.querySelectorAll('.nudge-actions button').forEach(btn => {
       btn.addEventListener('click', () => {
         const nudge = btn.closest('.sinead-nudge');
-        if (btn.textContent.trim() === 'Add it') { Grocery.addItem('Chicken'); }
-        nudge?.remove();
+        // data-action is more reliable than matching button text —
+        // add data-action="accept" / data-action="dismiss" in the HTML
+        const action = btn.dataset.action || (btn.textContent.trim() === 'Add it' ? 'accept' : 'dismiss');
+
+        if (action === 'accept') {
+          Grocery.addItem('Chicken');
+        }
+        this.removeWithFade(nudge);
       });
     });
+  },
+
+  // "From yesterday" unfinished item — Move to today / New date / Let it go
+  initCarryOverActions() {
+    document.querySelectorAll('.carry-over-actions button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.carry-over-item');
+        const label = btn.textContent.trim();
+
+        if (label === 'Move to today') {
+          // TODO: once backend exists, this sets the note's date to today
+          this.removeWithFade(item);
+        } else if (label === 'New date') {
+          Modals.open('pick-date');
+        } else if (label === 'Let it go') {
+          this.removeWithFade(item);
+        }
+      });
+    });
+  },
+
+  // Removes an element after a brief fade, and moves focus somewhere
+  // sensible so keyboard users aren't left stranded on a removed element
+  removeWithFade(el) {
+    if (!el) return;
+    const next = el.nextElementSibling || el.previousElementSibling || el.parentElement;
+    el.style.transition = 'opacity 0.2s ease';
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.remove();
+      next?.focus?.();
+    }, 200);
   }
 };
