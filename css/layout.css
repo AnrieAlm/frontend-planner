@@ -1,9 +1,54 @@
-.screen { min-height: 100dvh; }
-#app-shell { display: grid; grid-template-columns: var(--sidebar-width) 1fr; grid-template-rows: 1fr; min-height: 100dvh; }
-#main-content { padding: var(--sp-lg); overflow-y: auto; max-height: 100dvh; }
-.page { max-width: 720px; margin: 0 auto; }
-@media (max-width: 768px) {
-  #app-shell { grid-template-columns: 1fr; }
-  #sidebar { display: none; }
-  #main-content { padding-bottom: calc(var(--bottom-nav-height) + var(--sp-lg)); }
+/*
+  Petal Planner — App Shell Layout
+  Sidebar + main content on desktop, bottom nav on mobile.
+  Breakpoint: 700px (kept consistent with the rest of the design system).
+*/
+
+.screen {
+  min-height: 100dvh;
+}
+
+/* App shell — sidebar + main */
+#app-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: 1fr;
+  min-height: 100dvh;
+}
+
+#main-content {
+  padding: var(--sp-lg);
+  overflow-y: auto;
+  max-height: 100dvh;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Mobile: single column, bottom nav */
+@media (max-width: 700px) {
+  #app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  #sidebar {
+    display: none;
+  }
+
+  #main-content {
+    padding: var(--sp-md);
+    padding-bottom: calc(var(--bottom-nav-height) + var(--sp-lg) + env(safe-area-inset-bottom, 0px));
+  }
+
+  #bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+/* Wide content inside a page (tables, long routine timelines) scrolls
+   sideways in its own box rather than pushing the whole page wide */
+.scroll-x {
+  overflow-x: auto;
 }
