@@ -77,7 +77,7 @@ const Modals = {
       // Focus the first input/select/textarea in the modal — required
       // by the design system's "Focus: inputs focused on modal open"
       // rule, previously not implemented
-      const firstField = this.content.querySelector('input, select, textarea, button');
+      const firstField = this.content.querySelector('input, select, textarea');
       firstField?.focus();
 
       this.currentData = data;

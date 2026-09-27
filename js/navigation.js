@@ -3,32 +3,31 @@
  */
 const Navigation = {
   init() {
-    // Sidebar links + bottom nav items both use [data-page]
-    document.querySelectorAll('[data-page]').forEach(link => {
-      link.addEventListener('click', (e) => {
+    // Delegated on document, not bound per-element at startup — this is
+    // required because [data-page] links inside components loaded later
+    // (like the "More" sheet, fetched on demand) don't exist in the DOM
+    // yet when init() runs, so a per-element listener would miss them.
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('[data-page]');
+      if (link) {
         e.preventDefault();
         this.goTo(link.dataset.page);
-      });
+      }
     });
   },
 
   goTo(pageName) {
-    // Hide all pages
     document.querySelectorAll('.page').forEach(p => {
       p.classList.add('hidden');
       p.classList.remove('active');
     });
 
-    // Show target page
     const target = document.getElementById(`page-${pageName}`);
     if (target) {
       target.classList.remove('hidden');
       target.classList.add('active');
     }
 
-    // Update active state on every nav link that points at this page
-    // (sidebar link AND bottom-nav item both get updated, since both
-    // use the same [data-page] attribute)
     document.querySelectorAll('[data-page]').forEach(link => {
       const isActive = link.dataset.page === pageName;
       link.classList.toggle('active', isActive);

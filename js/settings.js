@@ -9,43 +9,28 @@ const Settings = {
     this.initDangerZone();
   },
 
-  // ===== Theme picker: Cottagecore / Midnight Garden / System =====
+  // ===== Theme picker: Cottagecore / Midnight Garden =====
   initTheme() {
-    const saved = localStorage.getItem(this.STORAGE_KEY) || 'system';
-    this.applyTheme(saved, /* save */ false);
+    const saved = localStorage.getItem(this.STORAGE_KEY) || 'cottagecore';
+    this.applyTheme(saved);
     this.updatePickerUI(saved);
 
     document.querySelectorAll('.theme-option').forEach(btn => {
       btn.addEventListener('click', () => {
-        const choice = btn.dataset.theme; // "cottagecore" | "midnight" | "system"
-        this.applyTheme(choice, /* save */ true);
+        const choice = btn.dataset.theme; // "cottagecore" | "midnight"
+        this.applyTheme(choice);
         this.updatePickerUI(choice);
+        localStorage.setItem(this.STORAGE_KEY, choice);
       });
-    });
-
-    // If the user picked "System", keep following OS changes live
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      const current = localStorage.getItem(this.STORAGE_KEY) || 'system';
-      if (current === 'system') {
-        this.applyTheme('system', /* save */ false);
-      }
     });
   },
 
-  applyTheme(choice, save) {
+  applyTheme(choice) {
     const html = document.documentElement;
-
-    if (choice === 'system') {
-      // Let variables.css's @media (prefers-color-scheme: dark) block
-      // handle it — that block only fires when NO data-theme attribute
-      // is set, so we remove it entirely here
-      html.removeAttribute('data-theme');
+    if (choice === 'midnight') {
+      html.setAttribute('data-theme', 'midnight');
     } else {
-      html.setAttribute('data-theme', choice); // "cottagecore" or "midnight"
-    }
-
-    if (save) {
-      localStorage.setItem(this.STORAGE_KEY, choice);
+      html.removeAttribute('data-theme'); // Cottagecore is the unconditional default
     }
   },
 
@@ -64,9 +49,6 @@ const Settings = {
 
     const signoutBtn = document.querySelector('.btn-signout');
     signoutBtn?.addEventListener('click', () => {
-      // Stand-in for real logout — the actual FastAPI build clears the
-      // "token" cookie and redirects to /login server-side; this just
-      // swaps screens so the mock is navigable
       document.getElementById('app-shell').classList.add('hidden');
       document.getElementById('auth-screen').classList.remove('hidden');
     });

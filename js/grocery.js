@@ -3,20 +3,23 @@
  */
 const Grocery = {
   init() {
-    document.querySelectorAll('[data-modal="grocery-item"]').forEach(btn => {
-      btn.addEventListener('click', () => Modals.open('grocery-item'));
-    });
+  document.querySelectorAll('[data-modal="grocery-item"]').forEach(btn => {
+    btn.addEventListener('click', () => Modals.open('grocery-item'));
+  });
 
-    // Checkbox toggle — clicking anywhere on the label (the whole row)
-    // already activates the checkbox natively, no extra JS needed for that
-    document.querySelectorAll('.grocery-item input[type="checkbox"]').forEach(cb => {
-      cb.addEventListener('change', () => {
-        cb.closest('.grocery-item').classList.toggle('checked', cb.checked);
-      });
+  document.querySelectorAll('.grocery-item input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      cb.closest('.grocery-item').classList.toggle('checked', cb.checked);
     });
+  });
 
-    this.initActions();
-  },
+  this.initActions();
+
+  // Sinéad's proactive nudge dismiss button
+  document.querySelector('[data-close-nudge]')?.addEventListener('click', (e) => {
+    e.target.closest('.grocery-nudge')?.remove();
+  });
+},
 
   initActions() {
     const [clearBtn, readBtn] = document.querySelectorAll('.grocery-actions button');
