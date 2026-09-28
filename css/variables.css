@@ -23,6 +23,7 @@
   --accent-secondary:    #B5716F; /* Rose */
   --accent-tertiary:     #A17F1F; /* Gold */
   --accent-quaternary:   #8A6B8C; /* Dusty Plum */
+  --calendar-secondary:  #8A6B8C; /* same as Dusty Plum — Cottagecore habit/deadline marker, unchanged */
   --accent-on:           #FDFBF7; /* text/icon colour sitting ON any accent */
 
   /* Post-it Colors (Vintage) */
@@ -93,6 +94,7 @@
   --accent-secondary:    #83A788; /* Moss */
   --accent-tertiary:     #AB7F69; /* Cocoa */
   --accent-quaternary:   #D98FA3; /* Dusty Berry */
+  --calendar-secondary:  #83A788; /* Moss — Midnight habit/deadline marker */
   --accent-on:           #1A1F1C; /* text/icon colour sitting ON any accent */
 
   --postit-1: #EDE3D0;
