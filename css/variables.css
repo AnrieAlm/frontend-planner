@@ -26,6 +26,18 @@
   --calendar-secondary:  #8A6B8C; /* same as Dusty Plum — Cottagecore habit/deadline marker, unchanged */
   --accent-on:           #FDFBF7; /* text/icon colour sitting ON any accent */
 
+  /* Bucket List keepsakes — each category's accent role, since Movies/
+     Places/Things deliberately use a DIFFERENT role in Midnight Garden
+     than in Cottagecore (Experiences stays Quaternary in both). */
+  --bkl-movies-accent:      var(--accent-secondary); /* Rose */
+  --bkl-places-accent:      var(--accent-primary);   /* Sage */
+  --bkl-things-accent:      var(--accent-tertiary);  /* Gold */
+  --bkl-experiences-accent: var(--accent-quaternary);/* Dusty Plum */
+  /* Ink text sitting on the physical paper objects — Cottagecore's real
+     --text-primary/secondary are already dark enough to reuse directly. */
+  --bkl-ink:      var(--text-primary);
+  --bkl-ink-soft: var(--text-secondary);
+
   /* Post-it Colors (Vintage) */
     --postit-1: #F2E3C6; /* Aged Yellow */
     --postit-2: #F0D6D6; /* Dried Rose */
@@ -96,6 +108,20 @@
   --accent-quaternary:   #D98FA3; /* Dusty Berry */
   --calendar-secondary:  #83A788; /* Moss — Midnight habit/deadline marker */
   --accent-on:           #1A1F1C; /* text/icon colour sitting ON any accent */
+
+  /* Bucket List keepsakes — roles deliberately shift per theme here
+     (Movies: Secondary in Cottagecore -> Tertiary in Midnight; Places:
+     Primary -> Secondary; Things: Tertiary -> Primary). Experiences
+     stays Quaternary in both. */
+  --bkl-movies-accent:      var(--accent-tertiary); /* Cocoa */
+  --bkl-places-accent:      var(--accent-secondary);/* Moss */
+  --bkl-things-accent:      var(--accent-primary);  /* Gold */
+  --bkl-experiences-accent: var(--accent-quaternary);/* Dusty Berry */
+  /* Midnight Garden's real --text-primary is light — wrong for text
+     sitting on light paper objects, so these are fixed dark literals
+     instead of reusing the theme's normal text tokens. */
+  --bkl-ink:      #2A2520;
+  --bkl-ink-soft: #6B5D4F;
 
   --postit-1: #EDE3D0;
   --postit-2: #CFDACF;
