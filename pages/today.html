@@ -6,15 +6,51 @@
   <span class="today-subtitle">a quiet morning</span>
 </div>
 
-<!-- Sinéad AI nudge -->
+<!-- Day capture — speak or type everything on your mind; Sinéad reads
+     this to organise the rest of the day. AI parsing isn't wired to a
+     real backend yet, so submitting shows mock suggestion chips rather
+     than an actual parse. -->
+<div class="today-capture">
+  <h3>What's on your mind?</h3>
+  <p class="capture-hint">Tell Sinéad about your day — type or speak, as much as you want.</p>
+  <div class="capture-input-row">
+    <textarea id="today-capture-input" placeholder="e.g. Dentist at 2pm, need to finish the thesis intro, don't forget Mum's birthday is Friday…"></textarea>
+    <button type="button" class="capture-mic-btn" id="today-capture-mic" aria-label="Speak instead of typing">🎤</button>
+  </div>
+  <div class="capture-footer">
+    <span class="capture-mic-status hidden" id="today-capture-mic-status">Voice capture isn't connected yet — type instead for now</span>
+    <button type="button" class="btn-capture-submit" id="today-capture-submit">Sort my day</button>
+  </div>
+
+  <div class="capture-suggestions hidden" id="today-capture-suggestions">
+    <p class="suggestions-label">Sinéad's guesses — tap to adjust, then confirm</p>
+    <div class="suggestion-chips">
+      <button type="button" class="suggestion-chip selected" data-chip="date">📅 Today</button>
+      <button type="button" class="suggestion-chip selected" data-chip="category">🏷️ Note</button>
+      <button type="button" class="suggestion-chip" data-chip="urgent">⚑ Mark urgent</button>
+    </div>
+    <button type="button" class="btn-capture-confirm" id="today-capture-confirm">Add to my day</button>
+  </div>
+</div>
+
+<!-- Urgent -->
+<div class="today-urgent">
+  <h3>Urgent</h3>
+  <div class="urgent-card">
+    ⚑ <strong>Due Fri</strong> — MSc thesis methodology chapter<br />
+    Aim to finish today · 2 days to deadline
+  </div>
+</div>
+
+<!-- Sinéad AI nudge — compact, notification-style rather than a big
+     banner, so it doesn't compete with the capture box and Urgent
+     above it for attention -->
 <div class="sinead-nudge">
   <img class="sinead-avatar" src="images/placeholder-avatar.svg" alt="" />
-  <div>
-    <p>🧠 <strong>Sinéad noticed:</strong> You usually pick up chicken on Thursdays — it's Thursday today. Add it to your grocery list?</p>
-    <div class="nudge-actions">
-      <button data-action="accept">Add it</button>
-      <button data-action="dismiss">Not today</button>
-    </div>
+  <p>🧠 <strong>Sinéad noticed:</strong> chicken on Thursdays — add it?</p>
+  <div class="nudge-actions">
+    <button data-action="accept">Add it</button>
+    <button data-action="dismiss">Not today</button>
   </div>
 </div>
 
@@ -58,15 +94,6 @@
       <button>New date</button>
       <button>Let it go</button>
     </div>
-  </div>
-</div>
-
-<!-- Urgent -->
-<div class="today-urgent">
-  <h3>Urgent</h3>
-  <div class="urgent-card">
-    ⚑ <strong>Due Fri</strong> — MSc thesis methodology chapter<br />
-    Aim to finish today · 2 days to deadline
   </div>
 </div>
 

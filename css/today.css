@@ -31,39 +31,44 @@
 
 /* ===== Sinéad AI nudge ===== */
 .sinead-nudge {
-  background: color-mix(in srgb, var(--accent-quaternary) 14%, var(--bg-base));
+  background: color-mix(in srgb, var(--accent-quaternary) 10%, var(--bg-base));
   border: 1px solid var(--border-soft);
-  border-radius: var(--radius-md);
-  padding: var(--sp-md);
+  border-radius: var(--radius-full);
+  padding: var(--sp-xs) var(--sp-sm);
   margin-bottom: var(--sp-lg);
   display: flex;
   gap: var(--sp-sm);
-  align-items: flex-start;
+  align-items: center;
 }
 
 .sinead-nudge .sinead-avatar {
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
   border-radius: var(--radius-full);
   flex-shrink: 0;
 }
 
 .sinead-nudge p {
-  font-size: var(--fs-base);
+  font-size: var(--fs-sm);
   color: var(--text-primary);
-  line-height: 1.5;
+  line-height: 1.4;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sinead-nudge .nudge-actions {
   display: flex;
-  gap: var(--sp-sm);
-  margin-top: var(--sp-sm);
+  gap: var(--sp-xs);
+  flex-shrink: 0;
 }
 
 .sinead-nudge .nudge-actions button {
   font-size: var(--fs-xs);
   font-weight: 700;
-  min-height: 36px;
+  min-height: 28px;
   padding: 0 var(--sp-sm);
   border-radius: var(--radius-full);
   background: var(--bg-raised);
@@ -300,4 +305,164 @@
 
 .btn-briefing .material-symbols-outlined {
   font-size: 22px;
+}
+/* ===== Day capture — speak/type everything, Sinéad organises it =====
+   AI parsing isn't wired to a real backend yet — submitting shows mock
+   suggestion chips (see js/today.js) rather than an actual parse. */
+.today-capture {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: var(--sp-md);
+  margin-bottom: var(--sp-lg);
+}
+
+.today-capture h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-lg);
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.capture-hint {
+  font-family: var(--font-hand);
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  margin-bottom: var(--sp-sm);
+}
+
+.capture-input-row {
+  display: flex;
+  gap: var(--sp-sm);
+  align-items: flex-start;
+}
+
+.today-capture textarea {
+  flex: 1;
+  min-height: 80px;
+  padding: var(--sp-sm) var(--sp-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-soft);
+  background: var(--bg-raised);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  resize: vertical;
+}
+.today-capture textarea:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.capture-mic-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary);
+  color: var(--accent-on);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s var(--ease-soft);
+}
+.capture-mic-btn:hover {
+  transform: translateY(-1px);
+}
+.capture-mic-btn:active {
+  transform: scale(0.94);
+}
+
+.capture-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-sm);
+}
+
+.capture-mic-status {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.btn-capture-submit {
+  min-height: 44px;
+  padding: 0 var(--sp-lg);
+  background: var(--accent-primary);
+  color: var(--accent-on);
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.15s var(--ease-soft), box-shadow 0.15s var(--ease-soft);
+  flex-shrink: 0;
+}
+.btn-capture-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lift);
+}
+
+.capture-suggestions {
+  margin-top: var(--sp-md);
+  padding-top: var(--sp-md);
+  border-top: 1px solid var(--border-soft);
+}
+
+.suggestions-label {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  margin-bottom: var(--sp-sm);
+}
+
+.suggestion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-md);
+}
+
+.suggestion-chip {
+  min-height: 36px;
+  padding: 0 var(--sp-md);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  background: var(--bg-raised);
+  border: 1.5px solid var(--border-soft);
+  color: var(--text-secondary);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.suggestion-chip.selected {
+  background: color-mix(in srgb, var(--accent-primary) 18%, var(--bg-base));
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.btn-capture-confirm {
+  min-height: 44px;
+  padding: 0 var(--sp-lg);
+  background: var(--accent-primary);
+  color: var(--accent-on);
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.15s var(--ease-soft);
+}
+.btn-capture-confirm:hover {
+  box-shadow: var(--shadow-lift);
+}
+
+@media (max-width: 700px) {
+  .capture-input-row {
+    flex-direction: column;
+  }
+  .capture-mic-btn {
+    align-self: flex-end;
+  }
 }

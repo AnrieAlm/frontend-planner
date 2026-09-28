@@ -18,6 +18,96 @@ const Today = {
     this.initNudgeActions();
     this.initCarryOverActions();
     this.initDatePicked();
+    this.initCapture();
+  },
+
+  // Day capture — type or speak everything on your mind, Sinéad reads
+  // it and suggests how to sort it. No real AI backend exists yet, so
+  // this shows plausible mock suggestions (a light keyword guess, nothing
+  // more) rather than an actual parse — see the project's actual AI plan
+  // (Groq note-parsing) in the backend spec for what this stands in for.
+  initCapture() {
+    const input = document.getElementById('today-capture-input');
+    const micBtn = document.getElementById('today-capture-mic');
+    const micStatus = document.getElementById('today-capture-mic-status');
+    const submitBtn = document.getElementById('today-capture-submit');
+    const suggestions = document.getElementById('today-capture-suggestions');
+    const confirmBtn = document.getElementById('today-capture-confirm');
+    if (!input || !submitBtn) return;
+
+    // Voice capture isn't connected to anything real yet — honest
+    // feedback instead of a mic button that silently does nothing
+    micBtn?.addEventListener('click', () => {
+      micStatus?.classList.remove('hidden');
+      setTimeout(() => micStatus?.classList.add('hidden'), 3000);
+    });
+
+    submitBtn.addEventListener('click', () => {
+      const text = input.value.trim();
+      if (!text) return;
+      this.guessCaptureChips(text);
+      suggestions?.classList.remove('hidden');
+      suggestions?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    document.querySelectorAll('.suggestion-chip').forEach(chip => {
+      chip.addEventListener('click', () => chip.classList.toggle('selected'));
+    });
+
+    confirmBtn?.addEventListener('click', () => {
+      const text = input.value.trim();
+      if (!text) return;
+
+      const urgent = document.querySelector('.suggestion-chip[data-chip="urgent"]')?.classList.contains('selected');
+      const firstLine = text.split('\n')[0].slice(0, 60);
+      this.addCapturedNote(firstLine, text, urgent);
+
+      input.value = '';
+      suggestions?.classList.add('hidden');
+    });
+  },
+
+  // Light keyword guesses to make the mock suggestions feel at least
+  // somewhat responsive to what was actually typed, rather than always
+  // showing the exact same three chips regardless of content.
+  guessCaptureChips(text) {
+    const lower = text.toLowerCase();
+    const urgentChip = document.querySelector('.suggestion-chip[data-chip="urgent"]');
+    const dateChip = document.querySelector('.suggestion-chip[data-chip="date"]');
+
+    const soundsUrgent = /urgent|asap|important|deadline/.test(lower);
+    urgentChip?.classList.toggle('selected', soundsUrgent);
+
+    const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    const mentionedDay = days.find(d => lower.includes(d));
+    if (dateChip) {
+      dateChip.textContent = mentionedDay
+        ? `📅 ${mentionedDay.charAt(0).toUpperCase() + mentionedDay.slice(1)}`
+        : '📅 Today';
+    }
+  },
+
+  // Adds a real .postit to the Notes page's board — the Notes page
+  // stays in the DOM even while hidden (see js/navigation.js), so this
+  // works correctly regardless of which page is currently showing.
+  addCapturedNote(title, content, urgent) {
+    const board = document.querySelector('.postit-board');
+    if (!board) return;
+
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = `postit colour-1${urgent ? ' urgent' : ''}`;
+    card.setAttribute('data-modal', 'edit-note');
+    card.innerHTML = `
+      <h4>${urgent ? '⚑ ' : ''}${title}</h4>
+      <p>${content}</p>
+      <span class="note-meta">From today's capture</span>
+    `;
+    board.prepend(card);
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+      Modals.open('edit-note', { sourceEl: card });
+    });
   },
 
   // Sinéad's proactive nudge ("Add chicken to grocery list?")
