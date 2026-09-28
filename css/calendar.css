@@ -46,7 +46,7 @@
 .btn-add-event {
   min-height: 44px;
   padding: 0 var(--sp-md);
-  background: var(--accent-primary);
+  background: var(--accent-quaternary);
   color: var(--accent-on);
   border-radius: var(--radius-full);
   font-weight: 700;
