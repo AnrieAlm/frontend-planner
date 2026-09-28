@@ -86,8 +86,8 @@
 
 .legend-today { background: var(--calendar-mark); }
 .legend-dot { background: var(--accent-primary); width: 6px; height: 6px; border-radius: var(--radius-full); }
-.legend-habit { border: 1.5px solid var(--accent-quaternary); background: transparent; }
-.legend-deadline { background: var(--accent-quaternary); border-radius: var(--radius-full); width: 6px; height: 6px; }
+.legend-habit { border: 1.5px solid var(--calendar-secondary); background: transparent; }
+.legend-deadline { background: var(--calendar-secondary); border-radius: var(--radius-full); width: 6px; height: 6px; }
 
 /* ===== Month grid ===== */
 .calendar-grid {
@@ -177,7 +177,7 @@
   width: 6px;
   height: 6px;
   border-radius: var(--radius-full);
-  border: 1.5px solid var(--accent-quaternary);
+  border: 1.5px solid var(--calendar-secondary);
   background: transparent;
 }
 
@@ -190,7 +190,7 @@
   width: 6px;
   height: 6px;
   border-radius: var(--radius-full);
-  background: var(--accent-quaternary);
+  background: var(--calendar-secondary);
 }
 
 /* ===== Day detail panel — stacked below the grid on every screen size ===== */
