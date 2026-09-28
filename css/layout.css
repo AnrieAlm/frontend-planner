@@ -63,3 +63,49 @@
 .scroll-x {
   overflow-x: auto;
 }
+
+/* ===== Desktop floating play button =====
+   Bottom-right is the conventional, unobtrusive FAB position — clear
+   of the sidebar on the left and the page content's natural reading
+   column, so it reads as a persistent utility rather than competing
+   for attention with the page itself. */
+.global-play-fab {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--accent-primary);
+  color: var(--accent-on);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lift);
+  z-index: 10;
+  transition: transform 0.15s var(--ease-soft), box-shadow 0.15s var(--ease-soft);
+}
+.global-play-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.22);
+}
+.global-play-fab:active {
+  transform: translateY(0) scale(0.94);
+}
+.global-play-fab .material-symbols-outlined {
+  font-size: 28px;
+}
+
+/* Hidden on mobile — the bottom-nav's centre button already becomes
+   this same Play action on the Today page (see js/navigation.js) */
+@media (max-width: 700px) {
+  .global-play-fab {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-play-fab {
+    transition: none;
+  }
+}

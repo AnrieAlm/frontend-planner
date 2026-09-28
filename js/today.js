@@ -8,6 +8,13 @@ const Today = {
       SineadAI.playBriefing();
     });
 
+    // Desktop floating play button — lives in index.html directly since
+    // it's visible on every page, not just Today's own content, but the
+    // action is identical so it's wired right here alongside it.
+    document.getElementById('global-play-fab')?.addEventListener('click', () => {
+      SineadAI.playBriefing();
+    });
+
     this.initNudgeActions();
     this.initCarryOverActions();
     this.initDatePicked();

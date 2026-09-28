@@ -45,6 +45,14 @@
       <section id="page-settings"   class="page hidden"></section>
     </main>
     <nav id="bottom-nav"></nav>
+
+    <!-- Desktop-only floating play button — visible on every page, not
+         just Today, so playing the briefing never requires navigating
+         anywhere first. Hidden on mobile, where the bottom-nav's centre
+         button already becomes this same action on the Today page. -->
+    <button id="global-play-fab" class="global-play-fab" aria-label="Play morning briefing">
+      <span class="material-symbols-outlined" aria-hidden="true">play_circle</span>
+    </button>
   </div>
 
   <div id="modal-overlay" class="modal-overlay hidden">
