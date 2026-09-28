@@ -91,7 +91,7 @@
 --day-circle-bg: rgba(240, 237, 231, 0.12);   /* same value as --border-soft — already passes at 4.93:1, just given its own token so it's not accidentally coupled to border-soft's future changes */
   --accent-primary:      #E0C387; /* Gold */
   --accent-secondary:    #83A788; /* Moss */
-  --accent-tertiary:     #C9AD7C; /* Tan */
+  --accent-tertiary:     #AB7F69; /* Cocoa */
   --accent-quaternary:   #D98FA3; /* Dusty Berry */
   --accent-on:           #1A1F1C; /* text/icon colour sitting ON any accent */
 
