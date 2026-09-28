@@ -371,11 +371,14 @@
   border-radius: var(--radius-full);
   background: var(--accent-primary);
   color: var(--accent-on);
-  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.15s var(--ease-soft);
+}
+.capture-mic-btn svg {
+  width: 20px;
+  height: 20px;
 }
 .capture-mic-btn:hover {
   transform: translateY(-1px);
@@ -482,11 +485,46 @@
 }
 
 @media (max-width: 700px) {
+  .today-capture {
+    padding: var(--sp-sm) var(--sp-md);
+  }
+
   .capture-input-row {
     flex-direction: column;
   }
   .capture-mic-btn {
     align-self: flex-end;
+  }
+
+  /* iOS Safari auto-zooms the whole page when a focused input's font
+     is under 16px — the textarea's normal 13px (--fs-sm) would trigger
+     that jarring zoom on every tap. 16px here avoids it. */
+  .today-capture textarea {
+    font-size: 16px;
+  }
+
+  .capture-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-capture-submit {
+    width: 100%;
+  }
+
+  /* One scrollable row instead of wrapping — easier to scan and tap
+     one-handed than a chip breaking awkwardly onto its own line */
+  .suggestion-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: thin;
+  }
+  .suggestion-chip {
+    flex-shrink: 0;
+  }
+
+  .btn-capture-confirm {
+    width: 100%;
   }
 }
 

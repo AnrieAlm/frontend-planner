@@ -1,0 +1,316 @@
+diff --git a/css/today.css b/css/today.css
+index 11672e1..fdf038f 100644
+--- a/css/today.css
++++ b/css/today.css
+@@ -33,8 +33,8 @@
+ .sinead-nudge {
+   background: color-mix(in srgb, var(--accent-quaternary) 10%, var(--bg-base));
+   border: 1px solid var(--border-soft);
+-  border-radius: var(--radius-full);
+-  padding: var(--sp-xs) var(--sp-sm);
++  border-radius: var(--radius-md);
++  padding: var(--sp-sm) var(--sp-sm) var(--sp-sm) var(--sp-md);
+   margin-bottom: var(--sp-lg);
+   display: flex;
+   gap: var(--sp-sm);
+@@ -42,8 +42,8 @@
+ }
+ 
+ .sinead-nudge .sinead-avatar {
+-  width: 20px;
+-  height: 20px;
++  width: 22px;
++  height: 22px;
+   border-radius: var(--radius-full);
+   flex-shrink: 0;
+ }
+@@ -54,9 +54,13 @@
+   line-height: 1.4;
+   flex: 1;
+   min-width: 0;
+-  white-space: nowrap;
++  /* wraps up to 2 lines instead of hard-truncating to 1 — the full
++     message stays readable, it just doesn't get as much vertical
++     room as the old big-banner version did */
++  display: -webkit-box;
++  -webkit-line-clamp: 2;
++  -webkit-box-orient: vertical;
+   overflow: hidden;
+-  text-overflow: ellipsis;
+ }
+ 
+ .sinead-nudge .nudge-actions {
+@@ -315,6 +319,10 @@
+   box-shadow: var(--shadow-soft);
+   padding: var(--sp-md);
+   margin-bottom: var(--sp-lg);
++  transition: box-shadow 0.2s var(--ease-soft);
++}
++.today-capture:focus-within {
++  box-shadow: var(--shadow-lift);
+ }
+ 
+ .today-capture h3 {
+@@ -376,6 +384,15 @@
+   transform: scale(0.94);
+ }
+ 
++/* mock "listening" state — honest preview, no fake backend */
++.capture-mic-btn.recording {
++  animation: mic-pulse 1.4s ease-in-out infinite;
++}
++@keyframes mic-pulse {
++  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-primary) 45%, transparent); }
++  50%      { box-shadow: 0 0 0 12px transparent; }
++}
++
+ .capture-footer {
+   display: flex;
+   align-items: center;
+@@ -406,6 +423,12 @@
+   transform: translateY(-1px);
+   box-shadow: var(--shadow-lift);
+ }
++.btn-capture-submit:disabled {
++  opacity: 0.45;
++  cursor: not-allowed;
++  box-shadow: none;
++  transform: none;
++}
+ 
+ .capture-suggestions {
+   margin-top: var(--sp-md);
+@@ -466,3 +489,36 @@
+     align-self: flex-end;
+   }
+ }
++
++/* feedback toast (created on demand by Today.toast in js/today.js) */
++.today-toast {
++  position: fixed;
++  bottom: var(--sp-lg);
++  left: 50%;
++  transform: translateX(-50%) translateY(10px);
++  background: var(--bg-raised);
++  color: var(--text-primary);
++  border: 1px solid var(--border-soft);
++  border-radius: var(--radius-full);
++  padding: var(--sp-xs) var(--sp-md);
++  font-size: var(--fs-sm);
++  font-weight: 600;
++  box-shadow: var(--shadow-lift);
++  opacity: 0;
++  pointer-events: none;
++  z-index: 100;
++  transition: opacity 0.25s var(--ease-soft), transform 0.25s var(--ease-soft);
++}
++.today-toast.show {
++  opacity: 1;
++  transform: translateX(-50%) translateY(0);
++}
++
++@media (prefers-reduced-motion: reduce) {
++  .capture-mic-btn.recording {
++    animation: none;
++  }
++  .today-toast {
++    transition: opacity 0.15s ease;
++  }
++}
+diff --git a/js/today.js b/js/today.js
+index a9173d7..03c9914 100644
+--- a/js/today.js
++++ b/js/today.js
+@@ -35,11 +35,43 @@ const Today = {
+     const confirmBtn = document.getElementById('today-capture-confirm');
+     if (!input || !submitBtn) return;
+ 
+-    // Voice capture isn't connected to anything real yet — honest
+-    // feedback instead of a mic button that silently does nothing
++    // Submit stays disabled until there's actually something to sort,
++    // rather than being clickable and silently doing nothing on an
++    // empty box
++    const syncSubmitState = () => { submitBtn.disabled = !input.value.trim(); };
++    input.addEventListener('input', syncSubmitState);
++    syncSubmitState();
++
++    // Ctrl/Cmd+Enter submits without reaching for the mouse
++    input.addEventListener('keydown', (e) => {
++      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
++        e.preventDefault();
++        submitBtn.click();
++      }
++    });
++
++    // Voice capture isn't connected to anything real yet, but a real
++    // start/stop toggle (with a visible "recording" pulse) is still a
++    // more honest preview of the intended interaction than a one-shot
++    // message — auto-stops after 4s either way so it can't get stuck on
+     micBtn?.addEventListener('click', () => {
+-      micStatus?.classList.remove('hidden');
+-      setTimeout(() => micStatus?.classList.add('hidden'), 3000);
++      const recording = micBtn.classList.toggle('recording');
++      micBtn.setAttribute('aria-pressed', String(recording));
++      clearTimeout(this._micTimer);
++
++      if (!recording) {
++        micStatus?.classList.add('hidden');
++        return;
++      }
++      if (micStatus) {
++        micStatus.textContent = 'Listening… (voice input isn\u2019t connected yet — this is a preview)';
++        micStatus.classList.remove('hidden');
++      }
++      this._micTimer = setTimeout(() => {
++        micBtn.classList.remove('recording');
++        micBtn.setAttribute('aria-pressed', 'false');
++        micStatus?.classList.add('hidden');
++      }, 4000);
+     });
+ 
+     submitBtn.addEventListener('click', () => {
+@@ -51,7 +83,10 @@ const Today = {
+     });
+ 
+     document.querySelectorAll('.suggestion-chip').forEach(chip => {
+-      chip.addEventListener('click', () => chip.classList.toggle('selected'));
++      chip.addEventListener('click', () => {
++        const selected = chip.classList.toggle('selected');
++        chip.setAttribute('aria-pressed', String(selected));
++      });
+     });
+ 
+     confirmBtn?.addEventListener('click', () => {
+@@ -62,8 +97,20 @@ const Today = {
+       const firstLine = text.split('\n')[0].slice(0, 60);
+       this.addCapturedNote(firstLine, text, urgent);
+ 
++      // Reset for the next capture — clears the box, disables submit
++      // again, hides the suggestions, and puts the chips back to their
++      // default state so a leftover "urgent" selection doesn't silently
++      // carry over into whatever gets typed next
+       input.value = '';
++      submitBtn.disabled = true;
+       suggestions?.classList.add('hidden');
++      document.querySelectorAll('.suggestion-chip').forEach(chip => {
++        const isDefault = chip.dataset.chip !== 'urgent';
++        chip.classList.toggle('selected', isDefault);
++        chip.setAttribute('aria-pressed', String(isDefault));
++      });
++
++      this.toast(urgent ? 'Added to Notes — marked urgent' : 'Added to Notes');
+     });
+   },
+ 
+@@ -77,6 +124,7 @@ const Today = {
+ 
+     const soundsUrgent = /urgent|asap|important|deadline/.test(lower);
+     urgentChip?.classList.toggle('selected', soundsUrgent);
++    urgentChip?.setAttribute('aria-pressed', String(soundsUrgent));
+ 
+     const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+     const mentionedDay = days.find(d => lower.includes(d));
+@@ -90,6 +138,9 @@ const Today = {
+   // Adds a real .postit to the Notes page's board — the Notes page
+   // stays in the DOM even while hidden (see js/navigation.js), so this
+   // works correctly regardless of which page is currently showing.
++  // Built with textContent rather than an innerHTML template string —
++  // whatever someone types into the capture box is shown as plain text,
++  // never parsed as markup.
+   addCapturedNote(title, content, urgent) {
+     const board = document.querySelector('.postit-board');
+     if (!board) return;
+@@ -98,11 +149,16 @@ const Today = {
+     card.type = 'button';
+     card.className = `postit colour-1${urgent ? ' urgent' : ''}`;
+     card.setAttribute('data-modal', 'edit-note');
+-    card.innerHTML = `
+-      <h4>${urgent ? '⚑ ' : ''}${title}</h4>
+-      <p>${content}</p>
+-      <span class="note-meta">From today's capture</span>
+-    `;
++
++    const h = document.createElement('h4');
++    h.textContent = (urgent ? '⚑ ' : '') + title;
++    const p = document.createElement('p');
++    p.textContent = content;
++    const meta = document.createElement('span');
++    meta.className = 'note-meta';
++    meta.textContent = "From today's capture";
++    card.append(h, p, meta);
++
+     board.prepend(card);
+     card.addEventListener('click', (e) => {
+       e.stopPropagation();
+@@ -110,6 +166,25 @@ const Today = {
+     });
+   },
+ 
++  // Brief bottom-of-screen confirmation, reused for anything on this
++  // page that needs a "that worked" acknowledgement without a full
++  // modal or a permanent banner.
++  toast(message) {
++    let el = document.querySelector('.today-toast');
++    if (!el) {
++      el = document.createElement('div');
++      el.className = 'today-toast';
++      el.setAttribute('role', 'status');
++      document.body.appendChild(el);
++    }
++    el.textContent = message;
++    el.classList.remove('show');
++    void el.offsetWidth; // restart the animation if a toast is already showing
++    el.classList.add('show');
++    clearTimeout(this._toastTimer);
++    this._toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
++  },
++
+   // Sinéad's proactive nudge ("Add chicken to grocery list?")
+   initNudgeActions() {
+     document.querySelectorAll('.nudge-actions button').forEach(btn => {
+diff --git a/pages/today.html b/pages/today.html
+index 5845a67..db9ab1c 100644
+--- a/pages/today.html
++++ b/pages/today.html
+@@ -15,19 +15,19 @@
+   <p class="capture-hint">Tell Sinéad about your day — type or speak, as much as you want.</p>
+   <div class="capture-input-row">
+     <textarea id="today-capture-input" placeholder="e.g. Dentist at 2pm, need to finish the thesis intro, don't forget Mum's birthday is Friday…"></textarea>
+-    <button type="button" class="capture-mic-btn" id="today-capture-mic" aria-label="Speak instead of typing">🎤</button>
++    <button type="button" class="capture-mic-btn" id="today-capture-mic" aria-label="Speak instead of typing" aria-pressed="false">🎤</button>
+   </div>
+   <div class="capture-footer">
+-    <span class="capture-mic-status hidden" id="today-capture-mic-status">Voice capture isn't connected yet — type instead for now</span>
+-    <button type="button" class="btn-capture-submit" id="today-capture-submit">Sort my day</button>
++    <span class="capture-mic-status hidden" id="today-capture-mic-status" role="status"></span>
++    <button type="button" class="btn-capture-submit" id="today-capture-submit" disabled>Sort my day</button>
+   </div>
+ 
+-  <div class="capture-suggestions hidden" id="today-capture-suggestions">
++  <div class="capture-suggestions hidden" id="today-capture-suggestions" aria-live="polite">
+     <p class="suggestions-label">Sinéad's guesses — tap to adjust, then confirm</p>
+-    <div class="suggestion-chips">
+-      <button type="button" class="suggestion-chip selected" data-chip="date">📅 Today</button>
+-      <button type="button" class="suggestion-chip selected" data-chip="category">🏷️ Note</button>
+-      <button type="button" class="suggestion-chip" data-chip="urgent">⚑ Mark urgent</button>
++    <div class="suggestion-chips" role="group" aria-label="Adjust Sinéad's suggestions">
++      <button type="button" class="suggestion-chip selected" data-chip="date" aria-pressed="true">📅 Today</button>
++      <button type="button" class="suggestion-chip selected" data-chip="category" aria-pressed="true">🏷️ Note</button>
++      <button type="button" class="suggestion-chip" data-chip="urgent" aria-pressed="false">⚑ Mark urgent</button>
+     </div>
+     <button type="button" class="btn-capture-confirm" id="today-capture-confirm">Add to my day</button>
+   </div>
+@@ -47,10 +47,10 @@
+      above it for attention -->
+ <div class="sinead-nudge">
+   <img class="sinead-avatar" src="images/placeholder-avatar.svg" alt="" />
+-  <p>🧠 <strong>Sinéad noticed:</strong> chicken on Thursdays — add it?</p>
++  <p>🧠 <strong>Sinéad noticed:</strong> You usually pick up chicken on Thursdays — it's Thursday today. Add it to your grocery list?</p>
+   <div class="nudge-actions">
+-    <button data-action="accept">Add it</button>
+-    <button data-action="dismiss">Not today</button>
++    <button type="button" data-action="accept">Add it</button>
++    <button type="button" data-action="dismiss">Not today</button>
+   </div>
+ </div>
+ 

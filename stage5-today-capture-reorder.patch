@@ -1,0 +1,428 @@
+diff --git a/css/today.css b/css/today.css
+index f04ec54..11672e1 100644
+--- a/css/today.css
++++ b/css/today.css
+@@ -31,39 +31,44 @@
+ 
+ /* ===== Sinéad AI nudge ===== */
+ .sinead-nudge {
+-  background: color-mix(in srgb, var(--accent-quaternary) 14%, var(--bg-base));
++  background: color-mix(in srgb, var(--accent-quaternary) 10%, var(--bg-base));
+   border: 1px solid var(--border-soft);
+-  border-radius: var(--radius-md);
+-  padding: var(--sp-md);
++  border-radius: var(--radius-full);
++  padding: var(--sp-xs) var(--sp-sm);
+   margin-bottom: var(--sp-lg);
+   display: flex;
+   gap: var(--sp-sm);
+-  align-items: flex-start;
++  align-items: center;
+ }
+ 
+ .sinead-nudge .sinead-avatar {
+-  width: 28px;
+-  height: 28px;
++  width: 20px;
++  height: 20px;
+   border-radius: var(--radius-full);
+   flex-shrink: 0;
+ }
+ 
+ .sinead-nudge p {
+-  font-size: var(--fs-base);
++  font-size: var(--fs-sm);
+   color: var(--text-primary);
+-  line-height: 1.5;
++  line-height: 1.4;
++  flex: 1;
++  min-width: 0;
++  white-space: nowrap;
++  overflow: hidden;
++  text-overflow: ellipsis;
+ }
+ 
+ .sinead-nudge .nudge-actions {
+   display: flex;
+-  gap: var(--sp-sm);
+-  margin-top: var(--sp-sm);
++  gap: var(--sp-xs);
++  flex-shrink: 0;
+ }
+ 
+ .sinead-nudge .nudge-actions button {
+   font-size: var(--fs-xs);
+   font-weight: 700;
+-  min-height: 36px;
++  min-height: 28px;
+   padding: 0 var(--sp-sm);
+   border-radius: var(--radius-full);
+   background: var(--bg-raised);
+@@ -300,4 +305,164 @@
+ 
+ .btn-briefing .material-symbols-outlined {
+   font-size: 22px;
+-}
+\ No newline at end of file
++}
++/* ===== Day capture — speak/type everything, Sinéad organises it =====
++   AI parsing isn't wired to a real backend yet — submitting shows mock
++   suggestion chips (see js/today.js) rather than an actual parse. */
++.today-capture {
++  background: var(--bg-card);
++  border-radius: var(--radius-md);
++  box-shadow: var(--shadow-soft);
++  padding: var(--sp-md);
++  margin-bottom: var(--sp-lg);
++}
++
++.today-capture h3 {
++  font-family: var(--font-display);
++  font-weight: 600;
++  font-size: var(--fs-lg);
++  color: var(--text-primary);
++  margin-bottom: 2px;
++}
++
++.capture-hint {
++  font-family: var(--font-hand);
++  font-size: var(--fs-md);
++  color: var(--text-secondary);
++  margin-bottom: var(--sp-sm);
++}
++
++.capture-input-row {
++  display: flex;
++  gap: var(--sp-sm);
++  align-items: flex-start;
++}
++
++.today-capture textarea {
++  flex: 1;
++  min-height: 80px;
++  padding: var(--sp-sm) var(--sp-md);
++  border-radius: var(--radius-sm);
++  border: 1px solid var(--border-soft);
++  background: var(--bg-raised);
++  color: var(--text-primary);
++  font-family: var(--font-body);
++  font-size: var(--fs-sm);
++  resize: vertical;
++}
++.today-capture textarea:focus-visible {
++  outline: 2px solid var(--focus-ring);
++  outline-offset: 1px;
++}
++
++.capture-mic-btn {
++  flex-shrink: 0;
++  width: 44px;
++  height: 44px;
++  min-height: 44px;
++  border-radius: var(--radius-full);
++  background: var(--accent-primary);
++  color: var(--accent-on);
++  font-size: 18px;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  transition: transform 0.15s var(--ease-soft);
++}
++.capture-mic-btn:hover {
++  transform: translateY(-1px);
++}
++.capture-mic-btn:active {
++  transform: scale(0.94);
++}
++
++.capture-footer {
++  display: flex;
++  align-items: center;
++  justify-content: flex-end;
++  gap: var(--sp-sm);
++  margin-top: var(--sp-sm);
++}
++
++.capture-mic-status {
++  font-size: var(--fs-xs);
++  color: var(--text-secondary);
++  flex: 1;
++}
++
++.btn-capture-submit {
++  min-height: 44px;
++  padding: 0 var(--sp-lg);
++  background: var(--accent-primary);
++  color: var(--accent-on);
++  border-radius: var(--radius-full);
++  font-weight: 700;
++  font-size: var(--fs-sm);
++  box-shadow: var(--shadow-soft);
++  transition: transform 0.15s var(--ease-soft), box-shadow 0.15s var(--ease-soft);
++  flex-shrink: 0;
++}
++.btn-capture-submit:hover {
++  transform: translateY(-1px);
++  box-shadow: var(--shadow-lift);
++}
++
++.capture-suggestions {
++  margin-top: var(--sp-md);
++  padding-top: var(--sp-md);
++  border-top: 1px solid var(--border-soft);
++}
++
++.suggestions-label {
++  font-size: var(--fs-xs);
++  color: var(--text-secondary);
++  margin-bottom: var(--sp-sm);
++}
++
++.suggestion-chips {
++  display: flex;
++  flex-wrap: wrap;
++  gap: var(--sp-sm);
++  margin-bottom: var(--sp-md);
++}
++
++.suggestion-chip {
++  min-height: 36px;
++  padding: 0 var(--sp-md);
++  border-radius: var(--radius-full);
++  font-size: var(--fs-sm);
++  font-weight: 600;
++  background: var(--bg-raised);
++  border: 1.5px solid var(--border-soft);
++  color: var(--text-secondary);
++  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
++}
++.suggestion-chip.selected {
++  background: color-mix(in srgb, var(--accent-primary) 18%, var(--bg-base));
++  border-color: var(--accent-primary);
++  color: var(--accent-primary);
++}
++
++.btn-capture-confirm {
++  min-height: 44px;
++  padding: 0 var(--sp-lg);
++  background: var(--accent-primary);
++  color: var(--accent-on);
++  border-radius: var(--radius-full);
++  font-weight: 700;
++  font-size: var(--fs-sm);
++  box-shadow: var(--shadow-soft);
++  transition: box-shadow 0.15s var(--ease-soft);
++}
++.btn-capture-confirm:hover {
++  box-shadow: var(--shadow-lift);
++}
++
++@media (max-width: 700px) {
++  .capture-input-row {
++    flex-direction: column;
++  }
++  .capture-mic-btn {
++    align-self: flex-end;
++  }
++}
+diff --git a/js/nav-icons.js b/js/nav-icons.js
+index 370a821..5bda0d5 100644
+--- a/js/nav-icons.js
++++ b/js/nav-icons.js
+@@ -32,7 +32,8 @@ const NavIcons = {
+     close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-width="1.5" stroke-linecap="square"/></svg>',
+     more: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>',
+     add: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="square"/></svg>',
+-    'panel-collapse': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" stroke-width="1.5"/><path d="M9 4v16" stroke-width="1.5"/><path d="M14 9l-3 3 3 3" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/></svg>'
++    'panel-collapse': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" stroke-width="1.5"/><path d="M9 4v16" stroke-width="1.5"/><path d="M14 9l-3 3 3 3" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"/></svg>',
++    mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3" stroke-width="1.5"/><path d="M5 11a7 7 0 0 0 14 0" stroke-width="1.5" stroke-linecap="square"/><path d="M12 18v3M9 21h6" stroke-width="1.5" stroke-linecap="square"/></svg>'
+   },
+ 
+   // Finds every placeholder inside root and swaps it for its real <svg>.
+diff --git a/js/today.js b/js/today.js
+index 36a6819..a9173d7 100644
+--- a/js/today.js
++++ b/js/today.js
+@@ -18,6 +18,96 @@ const Today = {
+     this.initNudgeActions();
+     this.initCarryOverActions();
+     this.initDatePicked();
++    this.initCapture();
++  },
++
++  // Day capture — type or speak everything on your mind, Sinéad reads
++  // it and suggests how to sort it. No real AI backend exists yet, so
++  // this shows plausible mock suggestions (a light keyword guess, nothing
++  // more) rather than an actual parse — see the project's actual AI plan
++  // (Groq note-parsing) in the backend spec for what this stands in for.
++  initCapture() {
++    const input = document.getElementById('today-capture-input');
++    const micBtn = document.getElementById('today-capture-mic');
++    const micStatus = document.getElementById('today-capture-mic-status');
++    const submitBtn = document.getElementById('today-capture-submit');
++    const suggestions = document.getElementById('today-capture-suggestions');
++    const confirmBtn = document.getElementById('today-capture-confirm');
++    if (!input || !submitBtn) return;
++
++    // Voice capture isn't connected to anything real yet — honest
++    // feedback instead of a mic button that silently does nothing
++    micBtn?.addEventListener('click', () => {
++      micStatus?.classList.remove('hidden');
++      setTimeout(() => micStatus?.classList.add('hidden'), 3000);
++    });
++
++    submitBtn.addEventListener('click', () => {
++      const text = input.value.trim();
++      if (!text) return;
++      this.guessCaptureChips(text);
++      suggestions?.classList.remove('hidden');
++      suggestions?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
++    });
++
++    document.querySelectorAll('.suggestion-chip').forEach(chip => {
++      chip.addEventListener('click', () => chip.classList.toggle('selected'));
++    });
++
++    confirmBtn?.addEventListener('click', () => {
++      const text = input.value.trim();
++      if (!text) return;
++
++      const urgent = document.querySelector('.suggestion-chip[data-chip="urgent"]')?.classList.contains('selected');
++      const firstLine = text.split('\n')[0].slice(0, 60);
++      this.addCapturedNote(firstLine, text, urgent);
++
++      input.value = '';
++      suggestions?.classList.add('hidden');
++    });
++  },
++
++  // Light keyword guesses to make the mock suggestions feel at least
++  // somewhat responsive to what was actually typed, rather than always
++  // showing the exact same three chips regardless of content.
++  guessCaptureChips(text) {
++    const lower = text.toLowerCase();
++    const urgentChip = document.querySelector('.suggestion-chip[data-chip="urgent"]');
++    const dateChip = document.querySelector('.suggestion-chip[data-chip="date"]');
++
++    const soundsUrgent = /urgent|asap|important|deadline/.test(lower);
++    urgentChip?.classList.toggle('selected', soundsUrgent);
++
++    const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
++    const mentionedDay = days.find(d => lower.includes(d));
++    if (dateChip) {
++      dateChip.textContent = mentionedDay
++        ? `📅 ${mentionedDay.charAt(0).toUpperCase() + mentionedDay.slice(1)}`
++        : '📅 Today';
++    }
++  },
++
++  // Adds a real .postit to the Notes page's board — the Notes page
++  // stays in the DOM even while hidden (see js/navigation.js), so this
++  // works correctly regardless of which page is currently showing.
++  addCapturedNote(title, content, urgent) {
++    const board = document.querySelector('.postit-board');
++    if (!board) return;
++
++    const card = document.createElement('button');
++    card.type = 'button';
++    card.className = `postit colour-1${urgent ? ' urgent' : ''}`;
++    card.setAttribute('data-modal', 'edit-note');
++    card.innerHTML = `
++      <h4>${urgent ? '⚑ ' : ''}${title}</h4>
++      <p>${content}</p>
++      <span class="note-meta">From today's capture</span>
++    `;
++    board.prepend(card);
++    card.addEventListener('click', (e) => {
++      e.stopPropagation();
++      Modals.open('edit-note', { sourceEl: card });
++    });
+   },
+ 
+   // Sinéad's proactive nudge ("Add chicken to grocery list?")
+diff --git a/pages/today.html b/pages/today.html
+index e5a7dab..5845a67 100644
+--- a/pages/today.html
++++ b/pages/today.html
+@@ -6,15 +6,51 @@
+   <span class="today-subtitle">a quiet morning</span>
+ </div>
+ 
+-<!-- Sinéad AI nudge -->
++<!-- Day capture — speak or type everything on your mind; Sinéad reads
++     this to organise the rest of the day. AI parsing isn't wired to a
++     real backend yet, so submitting shows mock suggestion chips rather
++     than an actual parse. -->
++<div class="today-capture">
++  <h3>What's on your mind?</h3>
++  <p class="capture-hint">Tell Sinéad about your day — type or speak, as much as you want.</p>
++  <div class="capture-input-row">
++    <textarea id="today-capture-input" placeholder="e.g. Dentist at 2pm, need to finish the thesis intro, don't forget Mum's birthday is Friday…"></textarea>
++    <button type="button" class="capture-mic-btn" id="today-capture-mic" aria-label="Speak instead of typing">🎤</button>
++  </div>
++  <div class="capture-footer">
++    <span class="capture-mic-status hidden" id="today-capture-mic-status">Voice capture isn't connected yet — type instead for now</span>
++    <button type="button" class="btn-capture-submit" id="today-capture-submit">Sort my day</button>
++  </div>
++
++  <div class="capture-suggestions hidden" id="today-capture-suggestions">
++    <p class="suggestions-label">Sinéad's guesses — tap to adjust, then confirm</p>
++    <div class="suggestion-chips">
++      <button type="button" class="suggestion-chip selected" data-chip="date">📅 Today</button>
++      <button type="button" class="suggestion-chip selected" data-chip="category">🏷️ Note</button>
++      <button type="button" class="suggestion-chip" data-chip="urgent">⚑ Mark urgent</button>
++    </div>
++    <button type="button" class="btn-capture-confirm" id="today-capture-confirm">Add to my day</button>
++  </div>
++</div>
++
++<!-- Urgent -->
++<div class="today-urgent">
++  <h3>Urgent</h3>
++  <div class="urgent-card">
++    ⚑ <strong>Due Fri</strong> — MSc thesis methodology chapter<br />
++    Aim to finish today · 2 days to deadline
++  </div>
++</div>
++
++<!-- Sinéad AI nudge — compact, notification-style rather than a big
++     banner, so it doesn't compete with the capture box and Urgent
++     above it for attention -->
+ <div class="sinead-nudge">
+   <img class="sinead-avatar" src="images/placeholder-avatar.svg" alt="" />
+-  <div>
+-    <p>🧠 <strong>Sinéad noticed:</strong> You usually pick up chicken on Thursdays — it's Thursday today. Add it to your grocery list?</p>
+-    <div class="nudge-actions">
+-      <button data-action="accept">Add it</button>
+-      <button data-action="dismiss">Not today</button>
+-    </div>
++  <p>🧠 <strong>Sinéad noticed:</strong> chicken on Thursdays — add it?</p>
++  <div class="nudge-actions">
++    <button data-action="accept">Add it</button>
++    <button data-action="dismiss">Not today</button>
+   </div>
+ </div>
+ 
+@@ -61,15 +97,6 @@
+   </div>
+ </div>
+ 
+-<!-- Urgent -->
+-<div class="today-urgent">
+-  <h3>Urgent</h3>
+-  <div class="urgent-card">
+-    ⚑ <strong>Due Fri</strong> — MSc thesis methodology chapter<br />
+-    Aim to finish today · 2 days to deadline
+-  </div>
+-</div>
+-
+ <!-- Schedule -->
+ <div class="today-urgent">
+   <h3>Today</h3>
+@@ -105,4 +132,4 @@
+   </ul>
+ </div>
+ 
+-<button class="btn-briefing"><span class="material-symbols-outlined" aria-hidden="true">play_circle</span> Play morning briefing</button>
+\ No newline at end of file
++<button class="btn-briefing"><span class="material-symbols-outlined" aria-hidden="true">play_circle</span> Play morning briefing</button>
