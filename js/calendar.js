@@ -19,6 +19,28 @@ const Calendar = {
         }
       });
     });
+
+    this.initMonthNav();
+  },
+
+  // Only one month of mock data exists (September 2026), so actually
+  // changing the grid to a different month would either show nothing
+  // or, worse, show September's days mislabelled as October — actively
+  // wrong rather than just incomplete. Until real month data exists,
+  // this gives honest, visible feedback instead of silently doing
+  // nothing (a dead button) or fabricating wrong dates.
+  initMonthNav() {
+    const note = document.querySelector('.calendar-nav-note');
+    let hideTimer = null;
+
+    document.querySelectorAll('.calendar-nav button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!note) return;
+        note.classList.remove('hidden');
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => note.classList.add('hidden'), 3000);
+      });
+    });
   },
 
   // Selecting a day updates which day is highlighted and refreshes the

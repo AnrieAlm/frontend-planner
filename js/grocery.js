@@ -14,12 +14,27 @@ const Grocery = {
   });
 
   this.initActions();
+  this.initModalAdd();
 
   // Sinéad's proactive nudge dismiss button
   document.querySelector('[data-close-nudge]')?.addEventListener('click', (e) => {
     e.target.closest('.grocery-nudge')?.remove();
   });
 },
+
+  // Wires modal-grocery-item's "Add item" button — the modal only has
+  // one field, so unlike the other modals this doesn't need to check
+  // which modal is open first.
+  initModalAdd() {
+    document.addEventListener('click', (e) => {
+      const addBtn = e.target.closest('#modal-content .btn-modal-primary');
+      if (!addBtn || !document.getElementById('grocery-item-name')) return;
+
+      const name = document.getElementById('grocery-item-name')?.value?.trim();
+      if (name) this.addItem(name);
+      Modals.close();
+    });
+  },
 
   initActions() {
     const [clearBtn, readBtn] = document.querySelectorAll('.grocery-actions button');

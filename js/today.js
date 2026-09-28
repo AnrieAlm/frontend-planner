@@ -10,6 +10,7 @@ const Today = {
 
     this.initNudgeActions();
     this.initCarryOverActions();
+    this.initDatePicked();
   },
 
   // Sinéad's proactive nudge ("Add chicken to grocery list?")
@@ -40,11 +41,24 @@ const Today = {
           // TODO: once backend exists, this sets the note's date to today
           this.removeWithFade(item);
         } else if (label === 'New date') {
-          Modals.open('pick-date');
+          Modals.open('pick-date', { sourceEl: item });
         } else if (label === 'Let it go') {
           this.removeWithFade(item);
         }
       });
+    });
+  },
+
+  // Fired by Modals when "Set date" is clicked inside modal-pick-date.
+  // Only acts when the modal was opened from a carry-over item (see
+  // initCarryOverActions above) — picking a new date resolves that
+  // item the same way "Move to today"/"Let it go" already do.
+  initDatePicked() {
+    document.addEventListener('petal:date-picked', (e) => {
+      const { sourceEl } = e.detail;
+      if (sourceEl?.classList.contains('carry-over-item')) {
+        this.removeWithFade(sourceEl);
+      }
     });
   },
 

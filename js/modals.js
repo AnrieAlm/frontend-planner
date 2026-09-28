@@ -35,6 +35,33 @@ const Modals = {
         return;
       }
 
+      // Day-picker toggle (M/T/W/T/F/S/S buttons) — identical behaviour
+      // needed in modal-edit-habit, modal-edit-routine and
+      // modal-new-routine, so it lives here once instead of being
+      // duplicated across three page-specific JS files.
+      const dayBtn = e.target.closest('.day-picker button');
+      if (dayBtn) {
+        const isActive = dayBtn.classList.toggle('active');
+        dayBtn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        return;
+      }
+
+      // "Set date" inside modal-pick-date is opened from more than one
+      // page (Today's carry-over items, Bucket List's "Plan it"), so
+      // rather than this file needing to know what each caller means
+      // by "a date was picked," it just dispatches an event with the
+      // date and whatever sourceEl the opener passed — each page wires
+      // its own listener for what to actually do with it.
+      const setDateBtn = e.target.closest('#modal-content .btn-modal-primary');
+      if (setDateBtn && document.getElementById('pick-date-input')) {
+        const date = document.getElementById('pick-date-input')?.value;
+        document.dispatchEvent(new CustomEvent('petal:date-picked', {
+          detail: { date, sourceEl: this.currentData?.sourceEl }
+        }));
+        this.close();
+        return;
+      }
+
       const closeBtn = e.target.closest('[data-close-modal]');
       if (closeBtn) {
         this.close();

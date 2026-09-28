@@ -29,6 +29,16 @@
   gap: var(--sp-sm);
 }
 
+.calendar-nav-note {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  margin: -4px 0 var(--sp-sm);
+  transition: opacity 0.2s ease;
+}
+.calendar-nav-note.hidden {
+  display: none;
+}
+
 .calendar-nav button {
   font-size: var(--fs-md);
   min-width: 36px;
