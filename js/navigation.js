@@ -47,6 +47,32 @@ const Navigation = {
 
     // Set the correct state for whichever page is active on first load
     this.updateNavAddButton(document.querySelector('.page.active')?.id?.replace('page-', '') || 'today');
+
+    this.initSidebarCollapse();
+  },
+
+  // Sidebar collapse (desktop) — Claude.ai-style icon-only rail.
+  // Persisted in localStorage so it stays collapsed across page loads,
+  // same pattern Settings.js already uses for the theme choice.
+  initSidebarCollapse() {
+    const STORAGE_KEY = 'petal-planner-sidebar-collapsed';
+    const shell = document.getElementById('app-shell');
+    const toggle = document.getElementById('sidebar-collapse-toggle');
+    if (!shell || !toggle) return;
+
+    const setCollapsed = (collapsed) => {
+      shell.classList.toggle('sidebar-collapsed', collapsed);
+      toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      toggle.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+    };
+
+    setCollapsed(localStorage.getItem(STORAGE_KEY) === 'true');
+
+    toggle.addEventListener('click', () => {
+      const collapsed = !shell.classList.contains('sidebar-collapsed');
+      setCollapsed(collapsed);
+      localStorage.setItem(STORAGE_KEY, String(collapsed));
+    });
   },
 
   goTo(pageName) {

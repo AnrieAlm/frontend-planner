@@ -83,6 +83,7 @@
 
   /* layout */
   --sidebar-width: 240px;
+  --sidebar-width-collapsed: 72px;
   --bottom-nav-height: 64px;
 
   /* motion */
