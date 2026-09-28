@@ -42,7 +42,7 @@
 }
 
 .sidebar-logo img,
-.sidebar-logo svg {
+.sidebar-logo > svg {
   width: 32px;
   height: 32px;
 }
@@ -142,7 +142,7 @@
 #app-shell.sidebar-collapsed .sidebar-logo {
   justify-content: center;
 }
-#app-shell.sidebar-collapsed .sidebar-logo svg,
+#app-shell.sidebar-collapsed .sidebar-logo > svg,
 #app-shell.sidebar-collapsed .sidebar-logo h1,
 #app-shell.sidebar-collapsed .sidebar-tagline,
 #app-shell.sidebar-collapsed .sidebar-nav-label,
