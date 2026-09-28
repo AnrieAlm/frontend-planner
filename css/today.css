@@ -33,8 +33,8 @@
 .sinead-nudge {
   background: color-mix(in srgb, var(--accent-quaternary) 10%, var(--bg-base));
   border: 1px solid var(--border-soft);
-  border-radius: var(--radius-full);
-  padding: var(--sp-xs) var(--sp-sm);
+  border-radius: var(--radius-md);
+  padding: var(--sp-sm) var(--sp-sm) var(--sp-sm) var(--sp-md);
   margin-bottom: var(--sp-lg);
   display: flex;
   gap: var(--sp-sm);
@@ -42,8 +42,8 @@
 }
 
 .sinead-nudge .sinead-avatar {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: var(--radius-full);
   flex-shrink: 0;
 }
@@ -54,9 +54,13 @@
   line-height: 1.4;
   flex: 1;
   min-width: 0;
-  white-space: nowrap;
+  /* wraps up to 2 lines instead of hard-truncating to 1 — the full
+     message stays readable, it just doesn't get as much vertical
+     room as the old big-banner version did */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .sinead-nudge .nudge-actions {
@@ -315,6 +319,10 @@
   box-shadow: var(--shadow-soft);
   padding: var(--sp-md);
   margin-bottom: var(--sp-lg);
+  transition: box-shadow 0.2s var(--ease-soft);
+}
+.today-capture:focus-within {
+  box-shadow: var(--shadow-lift);
 }
 
 .today-capture h3 {
@@ -376,6 +384,15 @@
   transform: scale(0.94);
 }
 
+/* mock "listening" state — honest preview, no fake backend */
+.capture-mic-btn.recording {
+  animation: mic-pulse 1.4s ease-in-out infinite;
+}
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-primary) 45%, transparent); }
+  50%      { box-shadow: 0 0 0 12px transparent; }
+}
+
 .capture-footer {
   display: flex;
   align-items: center;
@@ -405,6 +422,12 @@
 .btn-capture-submit:hover {
   transform: translateY(-1px);
   box-shadow: var(--shadow-lift);
+}
+.btn-capture-submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 .capture-suggestions {
@@ -464,5 +487,38 @@
   }
   .capture-mic-btn {
     align-self: flex-end;
+  }
+}
+
+/* feedback toast (created on demand by Today.toast in js/today.js) */
+.today-toast {
+  position: fixed;
+  bottom: var(--sp-lg);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--bg-raised);
+  color: var(--text-primary);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-full);
+  padding: var(--sp-xs) var(--sp-md);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  box-shadow: var(--shadow-lift);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+  transition: opacity 0.25s var(--ease-soft), transform 0.25s var(--ease-soft);
+}
+.today-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capture-mic-btn.recording {
+    animation: none;
+  }
+  .today-toast {
+    transition: opacity 0.15s ease;
   }
 }

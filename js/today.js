@@ -35,11 +35,43 @@ const Today = {
     const confirmBtn = document.getElementById('today-capture-confirm');
     if (!input || !submitBtn) return;
 
-    // Voice capture isn't connected to anything real yet — honest
-    // feedback instead of a mic button that silently does nothing
+    // Submit stays disabled until there's actually something to sort,
+    // rather than being clickable and silently doing nothing on an
+    // empty box
+    const syncSubmitState = () => { submitBtn.disabled = !input.value.trim(); };
+    input.addEventListener('input', syncSubmitState);
+    syncSubmitState();
+
+    // Ctrl/Cmd+Enter submits without reaching for the mouse
+    input.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+        e.preventDefault();
+        submitBtn.click();
+      }
+    });
+
+    // Voice capture isn't connected to anything real yet, but a real
+    // start/stop toggle (with a visible "recording" pulse) is still a
+    // more honest preview of the intended interaction than a one-shot
+    // message — auto-stops after 4s either way so it can't get stuck on
     micBtn?.addEventListener('click', () => {
-      micStatus?.classList.remove('hidden');
-      setTimeout(() => micStatus?.classList.add('hidden'), 3000);
+      const recording = micBtn.classList.toggle('recording');
+      micBtn.setAttribute('aria-pressed', String(recording));
+      clearTimeout(this._micTimer);
+
+      if (!recording) {
+        micStatus?.classList.add('hidden');
+        return;
+      }
+      if (micStatus) {
+        micStatus.textContent = 'Listening… (voice input isn\u2019t connected yet — this is a preview)';
+        micStatus.classList.remove('hidden');
+      }
+      this._micTimer = setTimeout(() => {
+        micBtn.classList.remove('recording');
+        micBtn.setAttribute('aria-pressed', 'false');
+        micStatus?.classList.add('hidden');
+      }, 4000);
     });
 
     submitBtn.addEventListener('click', () => {
@@ -51,7 +83,10 @@ const Today = {
     });
 
     document.querySelectorAll('.suggestion-chip').forEach(chip => {
-      chip.addEventListener('click', () => chip.classList.toggle('selected'));
+      chip.addEventListener('click', () => {
+        const selected = chip.classList.toggle('selected');
+        chip.setAttribute('aria-pressed', String(selected));
+      });
     });
 
     confirmBtn?.addEventListener('click', () => {
@@ -62,8 +97,20 @@ const Today = {
       const firstLine = text.split('\n')[0].slice(0, 60);
       this.addCapturedNote(firstLine, text, urgent);
 
+      // Reset for the next capture — clears the box, disables submit
+      // again, hides the suggestions, and puts the chips back to their
+      // default state so a leftover "urgent" selection doesn't silently
+      // carry over into whatever gets typed next
       input.value = '';
+      submitBtn.disabled = true;
       suggestions?.classList.add('hidden');
+      document.querySelectorAll('.suggestion-chip').forEach(chip => {
+        const isDefault = chip.dataset.chip !== 'urgent';
+        chip.classList.toggle('selected', isDefault);
+        chip.setAttribute('aria-pressed', String(isDefault));
+      });
+
+      this.toast(urgent ? 'Added to Notes — marked urgent' : 'Added to Notes');
     });
   },
 
@@ -77,6 +124,7 @@ const Today = {
 
     const soundsUrgent = /urgent|asap|important|deadline/.test(lower);
     urgentChip?.classList.toggle('selected', soundsUrgent);
+    urgentChip?.setAttribute('aria-pressed', String(soundsUrgent));
 
     const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     const mentionedDay = days.find(d => lower.includes(d));
@@ -90,6 +138,9 @@ const Today = {
   // Adds a real .postit to the Notes page's board — the Notes page
   // stays in the DOM even while hidden (see js/navigation.js), so this
   // works correctly regardless of which page is currently showing.
+  // Built with textContent rather than an innerHTML template string —
+  // whatever someone types into the capture box is shown as plain text,
+  // never parsed as markup.
   addCapturedNote(title, content, urgent) {
     const board = document.querySelector('.postit-board');
     if (!board) return;
@@ -98,16 +149,40 @@ const Today = {
     card.type = 'button';
     card.className = `postit colour-1${urgent ? ' urgent' : ''}`;
     card.setAttribute('data-modal', 'edit-note');
-    card.innerHTML = `
-      <h4>${urgent ? '⚑ ' : ''}${title}</h4>
-      <p>${content}</p>
-      <span class="note-meta">From today's capture</span>
-    `;
+
+    const h = document.createElement('h4');
+    h.textContent = (urgent ? '⚑ ' : '') + title;
+    const p = document.createElement('p');
+    p.textContent = content;
+    const meta = document.createElement('span');
+    meta.className = 'note-meta';
+    meta.textContent = "From today's capture";
+    card.append(h, p, meta);
+
     board.prepend(card);
     card.addEventListener('click', (e) => {
       e.stopPropagation();
       Modals.open('edit-note', { sourceEl: card });
     });
+  },
+
+  // Brief bottom-of-screen confirmation, reused for anything on this
+  // page that needs a "that worked" acknowledgement without a full
+  // modal or a permanent banner.
+  toast(message) {
+    let el = document.querySelector('.today-toast');
+    if (!el) {
+      el = document.createElement('div');
+      el.className = 'today-toast';
+      el.setAttribute('role', 'status');
+      document.body.appendChild(el);
+    }
+    el.textContent = message;
+    el.classList.remove('show');
+    void el.offsetWidth; // restart the animation if a toast is already showing
+    el.classList.add('show');
+    clearTimeout(this._toastTimer);
+    this._toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
   },
 
   // Sinéad's proactive nudge ("Add chicken to grocery list?")
