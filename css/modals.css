@@ -269,3 +269,9 @@
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
+
+.more-sheet-link svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}

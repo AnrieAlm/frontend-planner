@@ -73,6 +73,7 @@ const Modals = {
 
       this.content.innerHTML = await res.text();
       EmojiIcons.apply(this.content);
+      NavIcons.apply(this.content);
       this.overlay.classList.remove('hidden');
 
       // Focus the first input/select/textarea in the modal — required

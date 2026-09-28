@@ -107,3 +107,8 @@
   align-items: center;
 }
 .sidebar-user a:hover { color: var(--text-primary); }
+
+.sidebar-user a svg {
+  width: 18px;
+  height: 18px;
+}

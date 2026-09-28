@@ -42,10 +42,12 @@ async function loadComponents() {
   if (sidebar) {
     const res = await fetch('components/sidebar.html');
     sidebar.innerHTML = await res.text();
+    NavIcons.apply(sidebar);
   }
   if (bottomNav) {
     const res = await fetch('components/bottom-nav.html');
     bottomNav.innerHTML = await res.text();
+    NavIcons.apply(bottomNav);
   }
 }
 
